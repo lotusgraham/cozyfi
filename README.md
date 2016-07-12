@@ -42,8 +42,11 @@ package.json file
     "webpack": "^1.13.1"
   },
   "dependencies": {
-    "react": "^15.1.0",
-    "react-dom": "^15.1.0"
+    "material-ui": "^0.15.2",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
+    "react-tap-event-plugin": "^1.0.0"
   }
 }
+
 ```
