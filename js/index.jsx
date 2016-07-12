@@ -223,7 +223,7 @@ export default class Cardz extends React.Component {
   render() {
     return (
       <div>
-      {this.state.tilesData.map((tile) => (
+      {this.state.tilesData.map((tile, index) => (
       <Card
         onClick={this.handleToggle.bind(this)}
         expanded={tile.expanded}
