@@ -8,6 +8,8 @@ $ npm i
 $ npm run build
 $ webpack-dev-server
 ```
+Basic UI Wireframe looks strikingly similar to Google Maps except I will implement a diffenent MUI theme
+![Design: Basic UI Layout](./ui-wireframe.png)
 
 
 package.json file

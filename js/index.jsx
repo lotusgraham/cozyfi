@@ -194,8 +194,8 @@ export default class Cardz extends React.Component {
 
 // TODO:log state log this.state
 
-  handleToggle(toggle, event, index) {
-    var newState = update(this.state, {tilesData: {0: {expanded: {$set: toggle}}}})
+  handleToggle(toggle, index, event) {
+    var newState = update(this.state, {tilesData: {[index]: {expanded: {$set: toggle}}}})
     // this.update(this.state.tilesData[0].expanded, {$set: true});
     console.log(index)
 
@@ -223,9 +223,9 @@ export default class Cardz extends React.Component {
   render() {
     return (
       <div>
-      {this.state.tilesData.map((tile) => (
+      {this.state.tilesData.map((tile, index) => (
       <Card
-        onClick={this.handleToggle.bind(this)}
+        onClick={this.handleToggle.bind(this, !tile.expanded, index)}
         expanded={tile.expanded}
         onExpandChange={this.handleExpandChange}>
 
@@ -253,8 +253,6 @@ export default class Cardz extends React.Component {
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
         </CardText>
         <CardActions>
-          <FlatButton label="Expand" onTouchTap={this.handleExpand.bind(this)} />
-          <FlatButton label="Reduce" onTouchTap={this.handleReduce.bind(this)} />
         </CardActions>
       </Card>
     ))}
