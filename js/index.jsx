@@ -12,6 +12,7 @@ import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import update from 'react-addons-update';
+import CozyFiMap from './cozyfimap.jsx';
 
 const tilesData = [
   {
@@ -275,6 +276,7 @@ export default class Cardz extends React.Component {
 const App = () => (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
       <SinglePage />
+      <CozyFiMap />
   </MuiThemeProvider>
 );
 
