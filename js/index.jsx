@@ -141,6 +141,7 @@ export default class Cardz extends React.Component {
       tilesData: [
         {
           img: 'https://static1.squarespace.com/static/53fe0ff1e4b03ae33c173d0b/t/565f50cfe4b0d9b44ab71fe0/1449087188284/Provost-Studio-RTP-Frontier_Photo-14_x.jpg?format=1500w',
+          avatar: 'https://writenaked.files.wordpress.com/2016/01/img_3792.jpg?w=300&h=254',
           title: 'The Frontier',
           subtitle: 'Free coworking environment in RTP',
           wifi: 'RTPGuest',
@@ -155,6 +156,7 @@ export default class Cardz extends React.Component {
         },
         {
           img: 'https://c2.staticflickr.com/6/5349/17374712440_ae198715ea_z.jpg',
+          avatar: 'http://s3-media4.fl.yelpcdn.com/bphoto/eryKArSBuET-Dj4FcBuoKw/348s.jpg',
           title: 'Cocoa Cinnamon',
           subtitle: 'Hip coffee shop in Durham\'s DIY district',
           wifi: 'Cocoa Cinnamon',
@@ -169,11 +171,27 @@ export default class Cardz extends React.Component {
         },
         {
           img: 'http://video.aia.org/aiaawards/2013/2013-library-awards/jbhj-library/i/photo4.jpg',
+          avatar: 'https://i.vimeocdn.com/portrait/8150369_300x300.jpg',
           title: 'James B Hunt Jr Library',
           subtitle: 'NCSU Campus Library, designer digs with super-fast wifi',
           wifi: 'Library Wifi',
           passwrod: 'open',
           quirks: 'pay to park',
+          address: {street: '1070 Partners Way',
+                    city: 'Raleigh, NC',
+                    zip: 27606},
+          submitter: 'gwhitley',
+          expanded: false,
+
+        },
+        {
+          img: 'https://farm4.staticflickr.com/3835/15130401655_c191ae776b.jpg',
+          avatar: 'https://static1.squarespace.com/static/56b3cbf945bf21bec4f54976/t/56b657aeb6aa60e6d942a7cf/1467146667788/?format=1500w',
+          title: 'Honeysuckle Teahouse',
+          subtitle: 'Open air tea cafe on an herb farm outside Chapel Hill',
+          wifi: 'GuestWifi',
+          passwrod: '1122112233',
+          quirks: 'kind of a far drive from town',
           address: {street: '1070 Partners Way',
                     city: 'Raleigh, NC',
                     zip: 27606},
@@ -231,7 +249,7 @@ export default class Cardz extends React.Component {
         <CardHeader
           title={tile.title}
           subtitle={tile.subtitle}
-          avatar="http://lorempixel.com/100/100/nature/"
+          avatar={tile.avatar}
           actAsExpander={true}
           showExpandableButton={true}
         />
