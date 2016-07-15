@@ -230,6 +230,7 @@ export default class Cardz extends React.Component {
 
         // this.setState({expanded: false});
   };
+  
 
   render() {
     return (
@@ -274,11 +275,6 @@ export default class Cardz extends React.Component {
 }
 
 
-// style={{width: '60%',
-//        marginLeft: '10rem'}}   >
-
-
-
 
 const App = () => (
 
@@ -291,8 +287,3 @@ const App = () => (
 document.addEventListener('DOMContentLoaded', function() {
     ReactDOM.render(<App />, document.getElementById('app'));
 });
-
-// ReactDOM.render(
-//   <Carz />,
-//   document.getElementById('app')
-// );
