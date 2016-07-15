@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 
-import { GoogleMap, Marker, SearchBox } from "react-google-maps";
+import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
+const searchStyles = {
+    border: '1px solid transparent',
+    borderRadius: '1px',
+    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+    boxSizing: 'border-box',
+    MozBoxSizing: 'border-box',
+    fontSize: '14px',
+    height: '32px',
+    marginTop: '27px',
+    outline: 'none',
+    padding: '0 12px',
+    textOverflow: 'ellipses',
+    width: '400px',
+}
 
-class CozyFiMap extends Component {
+const mapCenter = {
+    lat: 36.002453,
+    lng: -78.905869,
+}
+
+export default class CozyFiMap extends React.Component {
   constructor() {
       super();
       //BINDS THIS TO EACH FUNCTION
@@ -12,30 +31,15 @@ class CozyFiMap extends Component {
 
       this.state = {
           bounds: null,
-          center: CozyFiMap.mapCenter,
+          center: mapCenter,
           markers: []
       }
   }
 
-  static inputStyle = {
-      "border": `1px solid transparent`,
-      "borderRadius": `1px`,
-      "boxShadow": `0 2px 6px rgba(0, 0, 0, 0.3)`,
-      "boxSizing": `border-box`,
-      "MozBoxSizing": `border-box`,
-      "fontSize": `14px`,
-      "height": `32px`,
-      "marginTop": `27px`,
-      "outline": `none`,
-      "padding": `0 12px`,
-      "textOverflow": `ellipses`,
-      "width": `400px`,
-  },
-
-  static mapCenter = {
-      lat: 36.002453,
-      lng: -78.905869,
-  }
+  // let mapCenter = {
+  //     lat: 36.002453,
+  //     lng: -78.905869,
+  // }
 
   handleBoundsChanged() {
     this.setState({
@@ -69,23 +73,22 @@ class CozyFiMap extends Component {
       <GoogleMap
         center={this.state.center}
         containerProps={{
-          ...this.props,
           style: {
-            height: `500px`,
+            height: '500px',
             width: '500px',
           },
         }}
         defaultZoom={15}
-        onBoundsChanged={::this.handleBoundsChanged}
+        onBoundsChanged={this.handleBoundsChanged}
         ref="map"
       >
         <SearchBox
           bounds={this.state.bounds}
           controlPosition={google.maps.ControlPosition.TOP_LEFT}
-          onPlacesChanged={::this.handlePlacesChanged}
+          onPlacesChanged={this.handlePlacesChanged}
           ref="searchBox"
           placeholder="Customized your placeholder"
-          style={CozyFiMap.inputStyle}
+          style={searchStyles}
         />
         {this.state.markers.map((marker, index) => (
           <Marker position={marker.position} key={index} />
@@ -94,5 +97,3 @@ class CozyFiMap extends Component {
     );
   }
 }
-
-module.exports = CozyFiMap;
