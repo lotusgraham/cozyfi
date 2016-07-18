@@ -15,6 +15,11 @@ import update from 'react-addons-update';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import CozyFiMap from './cozyfimap.jsx';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import Form from './Form'
+
 
 const NavBar = () => (
   <AppBar
@@ -207,6 +212,7 @@ export default class Cardz extends React.Component {
       <div>
       {this.state.tilesData.map((tile, index) => (
       <Card
+        inlineStyle=
         onClick={this.handleToggle.bind(this, !tile.expanded, index)}
         expanded={tile.expanded}
         onExpandChange={this.handleExpandChange}>
@@ -245,15 +251,37 @@ export default class Cardz extends React.Component {
 }
 
 
+//
+// const App = () => (
+//
+//   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+//       <SinglePage />
+//   </MuiThemeProvider>
+// );
+//
+//
+// document.addEventListener('DOMContentLoaded', function() {
+//     ReactDOM.render(<App />, document.getElementById('app'));
+// });
 
-const App = () => (
 
+
+
+
+
+
+const routes = (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <SinglePage />
+    <Provider store={store}>
+      <Router history={browserHistory}>
+        <Route path="/form" component={Form}/>
+        <Route path="/" component={SinglePage}/>
+      </Router>
+    </Provider>
   </MuiThemeProvider>
+)
+
+ReactDOM.render(
+  routes,
+  document.getElementById('app')
 );
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    ReactDOM.render(<App />, document.getElementById('app'));
-});
