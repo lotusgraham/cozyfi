@@ -102,8 +102,8 @@ export default class CozyFiMap extends React.Component {
         center={this.state.center}
         containerProps={{
           style: {
-            height: '500px',
-            width: '500px',
+            height: '750px',
+            width: '900px',
           },
         }}
         defaultZoom={15}
@@ -115,12 +115,15 @@ export default class CozyFiMap extends React.Component {
           controlPosition={google.maps.ControlPosition.TOP_LEFT}
           onPlacesChanged={this.handlePlacesChanged}
           ref="searchBox"
-          placeholder="Customized your placeholder"
+          placeholder="Enter the title of a Cozy-Coworking Space"
           style={searchStyles}
         />
         {this.state.markers.map((marker, index) => (
-          <Marker position={marker.position} key={index} />
+          <Marker position={marker.position}
+                  place='ChIJLcOqFtbarIkRnyH30OdQzUg'
+                  key={index} />
         ))}
+        <Marker place='ChIJLcOqFtbarIkRnyH30OdQzUg'></Marker>
       </GoogleMap>
     );
   }
