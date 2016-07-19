@@ -10,23 +10,14 @@ const addWorkspaceSuccess = (workspace) => {
 
 function addWorkspace(workspace) {
 	return function(dispatch) {
-        let postInit = {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				title: workspace.title,
-                desc: workspace.desc
-			})
-		}
-		return fetch('/workspaces/', postInit).then(res => {
-			return res.json();
-		}).then(data => {
-			console.log(data);
-			return dispatch(addWorkspaceSuccess(data))
-		})
+        let workspacesRef = firebase.database().ref('/workspaces/');
+        let testContent = {
+            "name": "A Place",
+            "desc": "A desc"
+        };
+			dispatch(addWorkspaceSuccess(data));
+            quotesRef.push(testContent);
+	
 	}
 }
 
