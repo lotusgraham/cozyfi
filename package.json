@@ -16,7 +16,8 @@
     "clean:css": "rm -f build/style.css",
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
-    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
+    "serve": "webpack-dev-server --content-base build/"
   },
   "author": "",
   "license": "ISC",
