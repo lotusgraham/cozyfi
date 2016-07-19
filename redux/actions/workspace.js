@@ -14,8 +14,8 @@ function addWorkspace(workspace) {
             "name": "A Place",
             "desc": "A desc"
         };
-			dispatch(addWorkspaceSuccess(data));
-            quotesRef.push(testContent);
+			dispatch(addWorkspaceSuccess(testContent));
+            workspacesRef.push(testContent);
 
 	}
 }
