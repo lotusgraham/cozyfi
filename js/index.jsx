@@ -212,7 +212,6 @@ export default class Cardz extends React.Component {
       <div>
       {this.state.tilesData.map((tile, index) => (
       <Card
-        inlineStyle=
         onClick={this.handleToggle.bind(this, !tile.expanded, index)}
         expanded={tile.expanded}
         onExpandChange={this.handleExpandChange}>
