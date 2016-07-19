@@ -1,7 +1,5 @@
 var firebase = require('firebase');
 
-
-
 var config = {
   apiKey: "AIzaSyBRPTZj2zc0cP01-4icR9TEma70maoNF1I",
   authDomain: "cozyfi-963e1.firebaseapp.com",
@@ -10,6 +8,6 @@ var config = {
 };
 
 var firebaseApp = firebase.initializeApp(config);
-console.log(firebase.auth());
+
 
 module.exports = firebaseApp.database();
