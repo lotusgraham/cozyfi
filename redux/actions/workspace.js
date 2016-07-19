@@ -28,10 +28,10 @@ function addWorkspace(workspace) {
 	}
 }
 
-const storeWorkspace = (recipe) => {
+const storeWorkspace = (workspace) => {
     return {
-        type: 'STORE_RECIPE'
-        recipe: recipe
+        type: 'STORE_WORKSPACE'
+        recipe: workspace
     }
 }
 
