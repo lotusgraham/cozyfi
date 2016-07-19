@@ -38,3 +38,5 @@ const storeWorkspace = (recipe) => {
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
+
+exports.storeWorkspace = storeWorkspace;
