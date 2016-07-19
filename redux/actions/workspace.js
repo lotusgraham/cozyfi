@@ -1,42 +1,25 @@
-import 'isomorphic-fetch';
+var firebaseApp = require('../../js/Firebase.jsx');
 
-const addWorkspaceSuccess = () => {
+const addWorkspaceSuccess = (workspace) => {
 	return {
 		type: 'ADD_WORKSPACE_SUCCESS',
+        workspace: workspace
 	};
 };
 
 function addWorkspace(workspace) {
 	return function(dispatch) {
-        let postInit = {
-			method: 'POST',
-			headers: {
-				'Accept': 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				title: workspace.title,
-                desc: workspace.desc
-			})
-		}
-		return fetch('/workspaces/', postInit).then(res => {
-			return res.json();
-		}).then(data => {
-			console.log(data);
-			return dispatch(addWorkspace(data))
-		})
-	}
-}
+        let workspacesRef = firebaseApp.ref('/workspaces/');
+        let testContent = {
+            "name": "A Place",
+            "desc": "A desc"
+        };
+			dispatch(addWorkspaceSuccess(testContent));
+            workspacesRef.push(testContent);
 
-const storeWorkspace = (recipe) => {
-    return {
-        type: 'STORE_RECIPE'
-        recipe: recipe
-    }
+	}
 }
 
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
-
-exports.storeWorkspace = storeWorkspace;
