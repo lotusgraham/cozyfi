@@ -19,6 +19,9 @@ import { Router, Route, Link, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import store from '../redux/store';
 import Form from './Form'
+import firebase from "firebase/app";
+require("firebase/auth");
+// require("firebase/database");
 
 
 const NavBar = () => (
