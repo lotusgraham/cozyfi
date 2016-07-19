@@ -1,7 +1,5 @@
-var firebase = require('firebase/app');
-require("firebase/auth");
-require("firebase/database");
-console.log(firebase);
+var firebase = require('firebase');
+
 
 
 var config = {
@@ -12,5 +10,6 @@ var config = {
 };
 
 var firebaseApp = firebase.initializeApp(config);
+console.log(firebase.auth());
 
 module.exports = firebaseApp.database();
