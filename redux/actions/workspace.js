@@ -31,7 +31,7 @@ function addWorkspace(workspace) {
 const storeWorkspace = (workspace) => {
     return {
         type: 'STORE_WORKSPACE'
-        recipe: workspace
+        workspace: workspace
     }
 }
 
