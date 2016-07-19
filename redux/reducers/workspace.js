@@ -18,6 +18,15 @@ const workspaceReducer = (state, action) => {
 		});
         state = newState;
 	}
+    if (action.type === 'STORE_WORKSPACE') {
+        let newState = update(state {
+            $set: {
+                workspaceTitle: action.workspaceTitle,
+                workspaceDesc: action.workspaceDesc
+            }
+        });
+        state = newState;
+    }
     return state;
 };
 
