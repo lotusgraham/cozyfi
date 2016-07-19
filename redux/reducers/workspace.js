@@ -1,5 +1,6 @@
-import * as actions from '../actions/workspace';
-import update from 'react-addons-update';
+var addWorkspaceSuccess = require('../actions/workspace').addWorkspaceSuccess;
+var addWorkspace = require('../actions/workspace').addWorkspace;
+var update = require('react-addons-update');
 
 const initialState = {
 	currentWorkspaces: [],
@@ -19,7 +20,7 @@ const workspaceReducer = (state, action) => {
         state = newState;
 	}
     if (action.type === 'STORE_WORKSPACE') {
-        let newState = update(state {
+        let newState = update(state, {
             $set: {
                 workspaceTitle: action.workspaceTitle,
                 workspaceDesc: action.workspaceDesc

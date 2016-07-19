@@ -1,5 +1,4 @@
-import 'isomorphic-fetch';
-import 'firebase';
+var firebaseApp = require('../../js/Firebase.jsx');
 
 const addWorkspaceSuccess = (workspace) => {
 	return {
@@ -10,14 +9,14 @@ const addWorkspaceSuccess = (workspace) => {
 
 function addWorkspace(workspace) {
 	return function(dispatch) {
-        let workspacesRef = firebase.database().ref('/workspaces/');
+        let workspacesRef = firebaseApp.ref('/workspaces/');
         let testContent = {
             "name": "A Place",
             "desc": "A desc"
         };
 			dispatch(addWorkspaceSuccess(data));
             quotesRef.push(testContent);
-	
+
 	}
 }
 
