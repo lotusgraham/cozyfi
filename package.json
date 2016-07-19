@@ -6,7 +6,7 @@
   "scripts": {
     "mkdir": "mkdir -p build",
     "build": "npm run clean && npm run mkdir && npm run build:html && npm run build:css && npm run build:js",
-    "watch": "npm run watch:html & npm run watch:css & npm run watch:js",
+    "watch": "npm run build && npm run watch:html & npm run watch:css & npm run watch:js",
     "clean": "rm -rf build",
     "build:html": "npm run clean:html && cp index.html build/",
     "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
@@ -16,7 +16,8 @@
     "clean:css": "rm -f build/style.css",
     "build:js": "npm run clean:js && webpack",
     "watch:js": "npm run build:js && webpack --watch",
-    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map"
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.$npm_package_version.js.map",
+    "serve": "webpack-dev-server --content-base build/"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +30,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
+    "isomorphic-fetch": "^2.2.1",
     "material-ui": "^0.15.2",
     "react": "^15.2.1",
     "react-addons-update": "^15.2.1",

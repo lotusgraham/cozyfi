@@ -3,8 +3,9 @@ var createStore = redux.createStore;
 var applyMiddleware = redux.applyMiddleware;
 var thunk = require('redux-thunk').default;
 
-var reducers = require('./reducers/combined');
+//TODO: make combined reducer when necessary
+var reducer = require('./reducers/workspace');
 
-var store = createStore(reducers.reducers, applyMiddleware(thunk));
+var store = createStore(reducer, applyMiddleware(thunk));
 
 module.exports = store;
