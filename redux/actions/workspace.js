@@ -1,8 +1,10 @@
 import 'isomorphic-fetch';
+import 'firebase';
 
-const addWorkspaceSuccess = () => {
+const addWorkspaceSuccess = (workspace) => {
 	return {
 		type: 'ADD_WORKSPACE_SUCCESS',
+        workspace: workspace
 	};
 };
 
@@ -23,20 +25,11 @@ function addWorkspace(workspace) {
 			return res.json();
 		}).then(data => {
 			console.log(data);
-			return dispatch(addWorkspace(data))
+			return dispatch(addWorkspaceSuccess(data))
 		})
 	}
-}
-
-const storeWorkspace = (workspace) => {
-    return {
-        type: 'STORE_WORKSPACE'
-        workspace: workspace
-    }
 }
 
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
-
-exports.storeWorkspace = storeWorkspace;
