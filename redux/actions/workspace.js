@@ -1,5 +1,11 @@
 import 'isomorphic-fetch';
 
+const addWorkspaceSuccess = () => {
+	return {
+		type: 'ADD_WORKSPACE_SUCCESS',
+	};
+};
+
 function addWorkspace(workspace) {
 	return function(dispatch) {
         let postInit = {
@@ -22,5 +28,13 @@ function addWorkspace(workspace) {
 	}
 }
 
+const storeWorkspace = (recipe) => {
+    return {
+        type: 'STORE_RECIPE'
+        recipe: recipe
+    }
+}
+
 
 exports.addWorkspace = addWorkspace;
+exports.addWorkspaceSuccess = addWorkspaceSuccess;
