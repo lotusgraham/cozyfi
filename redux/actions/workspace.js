@@ -9,10 +9,11 @@ function addWorkspace(workspace) {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				//
+				title: workspace.title,
+                desc: workspace.desc
 			})
 		}
-		return fetch('/workspaces/').then(res => {
+		return fetch('/workspaces/', postInit).then(res => {
 			return res.json();
 		}).then(data => {
 			console.log(data);
