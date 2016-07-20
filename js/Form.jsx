@@ -148,7 +148,7 @@ const Form = React.createClass({
               fullWidth={true}
             />
             <FormsyText
-              name="Additional Specific Directions Needed?"
+              name="directions"
               validations="isWords"
               validationError={wordsError}
               hintText="Any specific directions needed to find this place?"
@@ -158,7 +158,7 @@ const Form = React.createClass({
               style={submitStyle}
               type="submit"
               label="Submit"
-              disabled={!this.state.canSubmit}
+              disabled={false}
             />
           </Formsy.Form>
         </Paper>
