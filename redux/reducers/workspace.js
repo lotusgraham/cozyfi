@@ -1,6 +1,7 @@
 var addWorkspaceSuccess = require('../actions/workspace').addWorkspaceSuccess;
 var addWorkspace = require('../actions/workspace').addWorkspace;
 var update = require('react-addons-update');
+var setCurrentPlace = require('../actions/workspace').setCurrentPlace;
 
 const initialState = {
 	currentPlace: null,
@@ -14,7 +15,7 @@ const initialState = {
     isQuiet: null,
     quirks: null,
     perks: null,
-    directions: null	
+    directions: null
 };
 
 const workspaceReducer = (state, action) => {
@@ -36,6 +37,11 @@ const workspaceReducer = (state, action) => {
         });
         state = newState;
         console.log(state);
+	if (action.type === 'SET_CURRENT_PLACE') {
+		let newState = update(state, {
+		currentPlace: {$set: action.place}
+		})
+	}
     }
     return state;
 };
