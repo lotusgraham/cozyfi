@@ -164,7 +164,7 @@ const Form = React.createClass({
               style={submitStyle}
               type="submit"
               label="Submit"
-              disabled={false}
+              disabled={!this.state.canSubmit}
             />
           </Formsy.Form>
         </Paper>
