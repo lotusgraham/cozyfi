@@ -36,13 +36,14 @@ const workspaceReducer = (state, action) => {
             directions: { $set:action.workspace.directions }
         });
         state = newState;
-        console.log(state);
+	}
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
 		currentPlace: {$set: action.place}
 		})
+		state = newState;
+		console.log(state);
 	}
-    }
     return state;
 };
 
