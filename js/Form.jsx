@@ -5,6 +5,23 @@ import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
     FormsySelect, FormsyText, FormsyTime, FormsyToggle } from 'formsy-material-ui/lib';
+    import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
+
+
+    const searchStyles = {
+        border: '1px solid transparent',
+        borderRadius: '1px',
+        boxShadow: '0 2px 6px rgba(0, 0, 0, 0.3)',
+        boxSizing: 'border-box',
+        MozBoxSizing: 'border-box',
+        fontSize: '14px',
+        height: '32px',
+        marginTop: '27px',
+        outline: 'none',
+        padding: '0 12px',
+        textOverflow: 'ellipses',
+        width: '400px',
+    }
 
 const Form = React.createClass({
 
@@ -81,6 +98,7 @@ const Form = React.createClass({
             onValidSubmit={this.submitForm}
             onInvalidSubmit={this.notifyFormError}
           >
+
           <FormsyText
             name="Google Places"
             validations="isWords"
@@ -89,9 +107,39 @@ const Form = React.createClass({
             hintText="Enter Google Address or Title"
             floatingLabelText="Google Places"
           />
+          <FormsyText
+            name="Quirks?"
+            validations="isNumeric"
+            hintText="      Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
+            floatingLabelText="Quirks"
+            multiLine={true}
+            fullWidth={true}
+            rows={2}
+          />
+          <FormsyText
+            name="Perks?"
+            validations="isNumeric"
+            hintText="      What are your favorite things about this space? Why do you love to work here? "
+            floatingLabelText="Perks"
+            multiLine={true}
+            fullWidth={true}
+            rows={2}
 
-
+          />
+          <FormsyText
+            name="Additional Specific Directions Needed?"
+            validations="isWords"
+            validationError={wordsError}
+            hintText="      Any specific directions needed to find this place?"
+            floatingLabelText="Directions"
+            multiLine={true}
+            rows={2}
+          /><div></div>
+          <br></br>
           <div>Uncheck all that don't Apply</div>
+          <div>          <br></br>
+            <br></br>
+</div>
             <FormsyCheckbox
               name="wifi"
               label="Fast Wifi"
@@ -131,29 +179,7 @@ const Form = React.createClass({
                   label="Quiet"
                   style={switchStyle}
                 />
-            <FormsyText
-              name="Quirks?"
-              validations="isNumeric"
-              hintText="Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
-              floatingLabelText="Quirks"
-              multiLine={true}
-              fullWidth={true}
-            />
-            <FormsyText
-              name="Perks?"
-              validations="isNumeric"
-              hintText="What are your favorite things about this space? Why do you love to work here? "
-              floatingLabelText="Perks"
-              multiLine={true}
-              fullWidth={true}
-            />
-            <FormsyText
-              name="Additional Specific Directions Needed?"
-              validations="isWords"
-              validationError={wordsError}
-              hintText="Any specific directions needed to find this place?"
-              floatingLabelText="Directions"
-            />
+
             <RaisedButton
               style={submitStyle}
               type="submit"
