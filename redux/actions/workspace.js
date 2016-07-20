@@ -7,7 +7,7 @@ const addWorkspaceSuccess = (workspace) => {
 	};
 };
 
-const setCurrentPlace = () => {
+const setCurrentPlace = (place) => {
 	return {
 		type: 'SET_CURRENT_PLACE',
 		place
