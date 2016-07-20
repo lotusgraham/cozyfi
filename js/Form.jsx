@@ -1,10 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import Formsy from 'formsy-react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
     FormsySelect, FormsyText, FormsyTime, FormsyToggle } from 'formsy-material-ui/lib';
+
+import * as actions from '../redux/actions/workspace.js';
+import store from '../redux/store.js';
+console.log(connect);
 
 const Form = React.createClass({
 
@@ -61,7 +67,7 @@ const Form = React.createClass({
   },
 
   submitForm(data) {
-    console.log(JSON.stringify(data, null, 4));
+    this.props.dispatch(actions.addWorkspace(JSON.stringify(data, null, 4)));
   },
 
   notifyFormError(data) {
@@ -167,4 +173,12 @@ const Form = React.createClass({
   },
 });
 
-export default Form;
+const mapStateToProps = function(state, props) {
+  return {
+    state: state
+  };
+};
+
+const Container = connect(mapStateToProps)(Form);
+
+export default Container;
