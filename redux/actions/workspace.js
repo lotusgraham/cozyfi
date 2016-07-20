@@ -3,9 +3,16 @@ var firebaseApp = require('../../js/Firebase.jsx');
 const addWorkspaceSuccess = (workspace) => {
 	return {
 		type: 'ADD_WORKSPACE_SUCCESS',
-		workspace: workspace
+		workspace
 	};
 };
+
+const setCurrentPlace = () => {
+	return {
+		type: 'SET_CURRENT_PLACE',
+		place
+	}
+}
 
 function addWorkspace(workspace) {
 	return function(dispatch) {
@@ -32,3 +39,4 @@ function addWorkspace(workspace) {
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
+exports.setCurrentPlace = setCurrentPlace;

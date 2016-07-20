@@ -3,6 +3,7 @@ var addWorkspace = require('../actions/workspace').addWorkspace;
 var update = require('react-addons-update');
 
 const initialState = {
+	currentPlace: null,
 	currentWorkspaces: [],
 	workspaceSaved: false,
     GooglePlaces: null,
@@ -13,7 +14,7 @@ const initialState = {
     isQuiet: null,
     quirks: null,
     perks: null,
-    directions: null
+    directions: null	
 };
 
 const workspaceReducer = (state, action) => {
