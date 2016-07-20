@@ -9,12 +9,13 @@ const searchStyles = {
     boxSizing: 'border-box',
     MozBoxSizing: 'border-box',
     fontSize: '14px',
-    height: '32px',
-    marginTop: '27px',
+    height: '50px',
+    marginTop: '313px',
+    marginLeft: '-80px',
     outline: 'none',
     padding: '0 12px',
     textOverflow: 'ellipses',
-    width: '400px',
+    width: '350px',
 }
 
 const mapCenter = {
@@ -22,7 +23,7 @@ const mapCenter = {
     lng: -78.905869,
 }
 
-export default class CozyFiMap extends React.Component {
+export default class FormMap extends React.Component {
   constructor() {
       super();
       //BINDS THIS TO EACH FUNCTION
@@ -102,8 +103,8 @@ export default class CozyFiMap extends React.Component {
         center={this.state.center}
         containerProps={{
           style: {
-            height: '750px',
-            width: '500',
+            height: '400px',
+            width: '450px',
           },
         }}
         defaultZoom={15}

@@ -1,7 +1,7 @@
 //Core React functionality
 import React from 'react';
 import { render } from 'react-dom'
-import { Router, Route, Link, browserHistory } from 'react-router';
+import {IndexRoute, Router, Route, Link, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
@@ -44,7 +44,6 @@ const NavBar = () => (
 const SinglePage = () => (
 
     <div>
-        <NavBar />
         <div className = "singlePage" style={styles.container}>
             <div className="cardz" style={styles.cardz}> <Cardz /> </div>
             <div className="cozyFiMap" style={styles.cozyfi}> <CozyFiMap /> </div>
@@ -268,6 +267,18 @@ export default class Cardz extends React.Component {
 // });
 
 
+const App = (props) => (
+
+  <div className="container">
+        <nav>
+          <NavBar />
+        </nav>
+        <div>
+            {props.children}
+        </div>
+    </div>
+);
+
 
 
 
@@ -278,8 +289,9 @@ const routes = (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
         <Provider store={store}>
           <Router history={browserHistory}>
-            <Route path="/" component={SinglePage}>
-                <Route path="form" component={Form}/>
+            <Route path="/" component={App}>
+              <IndexRoute component={SinglePage}/>
+              <Route path="form" component={Form}/>
             </Route>
           </Router>
         </Provider>
