@@ -26,6 +26,7 @@ function addWorkspace(workspace) {
 			"hasTableSpace": true,
 			"hasOutdoorSpace": false,
 			"isQuiet": false,
+			"isAccessible": false,
 			"quirks": "quirky",
 			"perks": "perky",
 			"directions": "directy"

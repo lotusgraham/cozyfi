@@ -169,42 +169,47 @@ const Form = React.createClass({
             <br></br>
             </div>
             <FormsyCheckbox
-              name="wifi"
+              name="hasWifi"
               label="Fast Wifi"
               style={switchStyle}
             />
             <FormsyCheckbox
-                name="agree"
+                name="hasCaffeine"
                 label="Caffiene"
                 style={switchStyle}
                 checked={false}
               />
               <FormsyCheckbox
-                  name="agree"
+                  name="hasFood"
                   label="Food"
                   style={switchStyle}
                 />
             <FormsyCheckbox
-                  name="agree"
+                  name="hasOutlets"
                   label="Outlets"
                   style={switchStyle}
                   defaultChecked={true}
               />
             <FormsyCheckbox
-                name="agree"
+                name="hasTableSpace"
                 label="Table Space"
                 style={switchStyle}
                 defaultChecked={true}
 
               />
               <FormsyCheckbox
-                    name="agree"
+                    name="hasOutdoorSpace"
                     label="Outdoors"
                     style={switchStyle}
                 />
               <FormsyCheckbox
-                  name="agree"
+                  name="isQuiet"
                   label="Quiet"
+                  style={switchStyle}
+                />
+              <FormsyCheckbox
+                  name="isAccessible"
+                  label="Accessible"
                   style={switchStyle}
                 />
 
