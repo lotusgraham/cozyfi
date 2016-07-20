@@ -1,12 +1,17 @@
+//Core React functionality
 import React from 'react';
-var ReactDOM = require('react-dom');
+import { render } from 'react-dom'
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
+
+// Material-UI
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-var injectTapEventPlugin = require("react-tap-event-plugin");
-injectTapEventPlugin();
 import Toggle from 'material-ui/Toggle';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -14,7 +19,11 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import update from 'react-addons-update';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
+
+//App components.
 import CozyFiMap from './cozyfimap.jsx';
+import store from '../redux/store';
+import Form from './Form';
 
 const NavBar = () => (
   <AppBar
@@ -245,15 +254,40 @@ export default class Cardz extends React.Component {
 }
 
 
+//
+// const App = () => (
+//
+//   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+//       <SinglePage />
+//   </MuiThemeProvider>
+// );
+//
+//
+// document.addEventListener('DOMContentLoaded', function() {
+//     ReactDOM.render(<App />, document.getElementById('app'));
+// });
 
-const App = () => (
 
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-      <SinglePage />
-  </MuiThemeProvider>
+
+
+
+
+
+const routes = (
+  <Provider store={store}>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <Provider store={store}>
+          <Router history={browserHistory}>
+            <Route path="/" component={SinglePage}>
+                <Route path="form" component={Form}/>
+            </Route>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
+  </Provider>
+)
+
+render(
+  routes,
+  document.getElementById('app')
 );
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    ReactDOM.render(<App />, document.getElementById('app'));
-});
