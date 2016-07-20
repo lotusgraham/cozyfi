@@ -14,7 +14,7 @@ const setCurrentPlace = (place) => {
 	}
 }
 
-function addWorkspace(workspace) {
+const addWorkspace = (workspace) => {
 	return function(dispatch) {
 		let workspacesRef = firebaseApp.ref('/workspaces/');
 		let testContent = {
