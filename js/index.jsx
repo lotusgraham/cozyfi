@@ -277,14 +277,14 @@ const routes = (
   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <Provider store={store}>
       <Router history={browserHistory}>
+        <Route path="/" component={SinglePage}>
         <Route path="/form" component={Form}/>
-        <Route path="/" component={SinglePage}/>
       </Router>
     </Provider>
   </MuiThemeProvider>
 )
 
-ReactDOM.render(
+render(
   routes,
   document.getElementById('app')
 );
