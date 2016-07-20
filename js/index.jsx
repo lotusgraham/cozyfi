@@ -1,12 +1,17 @@
+//Core React functionality
 import React from 'react';
-var ReactDOM = require('react-dom');
+import { render } from 'react-dom'
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import injectTapEventPlugin from 'react-tap-event-plugin'
+injectTapEventPlugin();
+
+// Material-UI
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-var injectTapEventPlugin = require("react-tap-event-plugin");
-injectTapEventPlugin();
 import Toggle from 'material-ui/Toggle';
 import {GridList, GridTile} from 'material-ui/GridList';
 import IconButton from 'material-ui/IconButton';
@@ -14,11 +19,11 @@ import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 import update from 'react-addons-update';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
+
+//App components.
 import CozyFiMap from './cozyfimap.jsx';
-import { Router, Route, Link, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
 import store from '../redux/store';
-import Form from './Form'
+import Form from './Form';
 
 const NavBar = () => (
   <AppBar
