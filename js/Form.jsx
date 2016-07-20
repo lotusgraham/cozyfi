@@ -126,9 +126,18 @@ const Form = React.createClass({
             onInvalidSubmit={this.notifyFormError}
           >
           <FormsyText
+            name="Short Descrition"
+            validations="isNumeric"
+            hintText="In your own words, provide a short description. (this is displayed with the title.)"
+            floatingLabelText="Short Descrition"
+            multiLine={true}
+            fullWidth={true}
+            rows={2}
+          />
+          <FormsyText
             name="Quirks?"
             validations="isNumeric"
-            hintText="      Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
+            hintText="Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
             floatingLabelText="Quirks"
             multiLine={true}
             fullWidth={true}
@@ -137,7 +146,7 @@ const Form = React.createClass({
           <FormsyText
             name="Perks?"
             validations="isNumeric"
-            hintText="      What are your favorite things about this space? Why do you love to work here? "
+            hintText="What are your favorite things about this space? Why do you love to work here? "
             floatingLabelText="Perks"
             multiLine={true}
             fullWidth={true}
