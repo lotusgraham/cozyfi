@@ -5,7 +5,7 @@ var update = require('react-addons-update');
 const initialState = {
 	currentWorkspaces: [],
 	workspaceSaved: false,
-    name: null,
+    GooglePlaces: null,
     hasFastWifi: null,
     hasCaffeine: null,
     hasTableSpace: null,
@@ -25,7 +25,7 @@ const workspaceReducer = (state, action) => {
             },
             $set: {
                 workspaceSaved: true,
-                name: action.workspace.name,
+                GooglePlaces: action.workspace.GooglePlaces,
                 hasFastWifi: action.workspace.hasWifi,
                 hasCaffeine: action.workspace.hasCaffeine,
                 hasTableSpace: action.workspace.hasTableSpace,
