@@ -278,7 +278,8 @@ const routes = (
     <Provider store={store}>
       <Router history={browserHistory}>
         <Route path="/" component={SinglePage}>
-        <Route path="/form" component={Form}/>
+            <Route path="form" component={Form}/>
+        </Route>
       </Router>
     </Provider>
   </MuiThemeProvider>
