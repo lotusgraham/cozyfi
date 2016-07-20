@@ -1,4 +1,6 @@
 import React from 'react';
+import {connect} from 'react-redux';
+
 import Formsy from 'formsy-react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -22,6 +24,10 @@ import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
         textOverflow: 'ellipses',
         width: '400px',
     }
+
+import * as actions from '../redux/actions/workspace.js';
+import store from '../redux/store.js';
+console.log(connect);
 
 const Form = React.createClass({
 
@@ -78,7 +84,7 @@ const Form = React.createClass({
   },
 
   submitForm(data) {
-    alert(JSON.stringify(data, null, 4));
+    this.props.dispatch(actions.addWorkspace(JSON.stringify(data, null, 4)));
   },
 
   notifyFormError(data) {
@@ -141,45 +147,67 @@ const Form = React.createClass({
             <br></br>
 </div>
             <FormsyCheckbox
-              name="wifi"
+              name="hasWifi"
               label="Fast Wifi"
               style={switchStyle}
             />
             <FormsyCheckbox
-                name="agree"
+                name="hasCaffeine"
                 label="Caffiene"
                 style={switchStyle}
                 checked={false}
               />
               <FormsyCheckbox
-                  name="agree"
+                  name="hasFood"
                   label="Food"
                   style={switchStyle}
                 />
             <FormsyCheckbox
-                  name="agree"
+                  name="hasOutlets"
                   label="Outlets"
                   style={switchStyle}
                   defaultChecked={true}
               />
             <FormsyCheckbox
-                name="agree"
+                name="hasTableSpace"
                 label="Table Space"
                 style={switchStyle}
                 defaultChecked={true}
 
               />
               <FormsyCheckbox
-                    name="agree"
+                    name="hasOutdoorSpace"
                     label="Outdoors"
                     style={switchStyle}
                 />
               <FormsyCheckbox
-                  name="agree"
+                  name="isQuiet"
                   label="Quiet"
                   style={switchStyle}
                 />
-
+            <FormsyText
+              name="quirks"
+              validations="isNumeric"
+              hintText="Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
+              floatingLabelText="Quirks"
+              multiLine={true}
+              fullWidth={true}
+            />
+            <FormsyText
+              name="perks"
+              validations="isNumeric"
+              hintText="What are your favorite things about this space? Why do you love to work here? "
+              floatingLabelText="Perks"
+              multiLine={true}
+              fullWidth={true}
+            />
+            <FormsyText
+              name="directions"
+              validations="isWords"
+              validationError={wordsError}
+              hintText="Any specific directions needed to find this place?"
+              floatingLabelText="Directions"
+            />
             <RaisedButton
               style={submitStyle}
               type="submit"
@@ -193,4 +221,12 @@ const Form = React.createClass({
   },
 });
 
-export default Form;
+const mapStateToProps = function(state, props) {
+  return {
+    state: state
+  };
+};
+
+const Container = connect(mapStateToProps)(Form);
+
+export default Container;
