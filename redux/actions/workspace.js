@@ -11,9 +11,18 @@ function addWorkspace(workspace) {
 	return function(dispatch) {
         let workspacesRef = firebaseApp.ref('/workspaces/');
         let testContent = {
-            "name": "A Place",
-            "desc": "A desc"
-        };
+    "Google Places": "AvalancheCafe",
+    "hasWifi": false,
+    "hasCaffeine": false,
+    "hasFood": false,
+    "hasOutlets": true,
+    "hasTableSpace": true,
+    "hasOutdoorSpace": false,
+    "isQuiet": false,
+    "quirks": "quirky",
+    "perks": "perky",
+    "directions": "directy"
+}
 			dispatch(addWorkspaceSuccess(testContent));
             workspacesRef.push(testContent);
 
