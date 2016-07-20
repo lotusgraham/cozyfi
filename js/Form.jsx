@@ -126,7 +126,7 @@ const Form = React.createClass({
             onInvalidSubmit={this.notifyFormError}
           >
           <FormsyText
-            name="Quirks?"
+            name="quirks"
             validations="isNumeric"
             hintText="      Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
             floatingLabelText="Quirks"
@@ -135,7 +135,7 @@ const Form = React.createClass({
             rows={2}
           />
           <FormsyText
-            name="Perks?"
+            name="perks"
             validations="isNumeric"
             hintText="      What are your favorite things about this space? Why do you love to work here? "
             floatingLabelText="Perks"
@@ -145,7 +145,7 @@ const Form = React.createClass({
 
           />
           <FormsyText
-            name="Additional Specific Directions Needed?"
+            name="direct"
             validations="isWords"
             validationError={wordsError}
             hintText="      Any specific directions needed to find this place?"
@@ -160,41 +160,41 @@ const Form = React.createClass({
             <br></br>
             </div>
             <FormsyCheckbox
-              name="wifi"
+              name="hasWifi"
               label="Fast Wifi"
               style={switchStyle}
             />
             <FormsyCheckbox
-                name="agree"
+                name="hasCaffeine"
                 label="Caffiene"
                 style={switchStyle}
                 checked={false}
               />
               <FormsyCheckbox
-                  name="agree"
+                  name="hasFood"
                   label="Food"
                   style={switchStyle}
                 />
             <FormsyCheckbox
-                  name="agree"
+                  name="hasOutlets"
                   label="Outlets"
                   style={switchStyle}
                   defaultChecked={true}
               />
             <FormsyCheckbox
-                name="agree"
+                name="hasTableSpace"
                 label="Table Space"
                 style={switchStyle}
                 defaultChecked={true}
 
               />
               <FormsyCheckbox
-                    name="agree"
+                    name="hasOutdoorSpace"
                     label="Outdoors"
                     style={switchStyle}
                 />
               <FormsyCheckbox
-                  name="agree"
+                  name="isQuiet"
                   label="Quiet"
                   style={switchStyle}
                 />
