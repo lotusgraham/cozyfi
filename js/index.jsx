@@ -274,15 +274,17 @@ export default class Cardz extends React.Component {
 
 
 const routes = (
-  <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-    <Provider store={store}>
-      <Router history={browserHistory}>
-        <Route path="/" component={SinglePage}>
-            <Route path="form" component={Form}/>
-        </Route>
-      </Router>
-    </Provider>
-  </MuiThemeProvider>
+  <Provider store={store}>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <Provider store={store}>
+          <Router history={browserHistory}>
+            <Route path="/" component={SinglePage}>
+                <Route path="form" component={Form}/>
+            </Route>
+          </Router>
+        </Provider>
+      </MuiThemeProvider>
+  </Provider>
 )
 
 render(
