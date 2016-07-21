@@ -46,7 +46,14 @@ const workspaceReducer = (state, action) => {
 		currentPlace: {$set: action.place}
 		})
 		state = newState;
-		console.log(state);
+		console.log('SET_CURRENT_PLACE', state);
+        var placeID = state.currentPlace + '';
+        console.log(placeID);
+        var apiKey = 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ';
+        var gMaps = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeID + '&key='+ apiKey;
+        console.log(gMaps);
+        // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=';
+        // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ';
 	}
     return state;
 };
