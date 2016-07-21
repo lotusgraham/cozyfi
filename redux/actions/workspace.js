@@ -3,15 +3,22 @@ var firebaseApp = require('../../js/Firebase.jsx');
 const addWorkspaceSuccess = (workspace) => {
 	return {
 		type: 'ADD_WORKSPACE_SUCCESS',
-		workspace: workspace
+		workspace
 	};
 };
 
-function addWorkspace(workspace) {
+const setCurrentPlace = (place) => {
+	return {
+		type: 'SET_CURRENT_PLACE',
+		place
+	}
+}
+
+const addWorkspace = (workspace) => {
 	return function(dispatch) {
 		let workspacesRef = firebaseApp.ref('/workspaces/');
 		let testContent = {
-			"Google Places": "AvalancheCafe",
+			"description": "short description",
 			"hasWifi": false,
 			"hasCaffeine": false,
 			"hasFood": false,
@@ -19,6 +26,7 @@ function addWorkspace(workspace) {
 			"hasTableSpace": true,
 			"hasOutdoorSpace": false,
 			"isQuiet": false,
+			"isAccessible": false,
 			"quirks": "quirky",
 			"perks": "perky",
 			"directions": "directy"
@@ -32,3 +40,4 @@ function addWorkspace(workspace) {
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
+exports.setCurrentPlace = setCurrentPlace;

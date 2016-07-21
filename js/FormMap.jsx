@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+
+import * as actions from '../redux/actions/workspace.js';
+import store from '../redux/store.js';
 
 import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
@@ -9,12 +13,13 @@ const searchStyles = {
     boxSizing: 'border-box',
     MozBoxSizing: 'border-box',
     fontSize: '14px',
-    height: '32px',
-    marginTop: '27px',
+    height: '50px',
+    marginTop: '313px',
+    marginLeft: '-80px',
     outline: 'none',
     padding: '0 12px',
     textOverflow: 'ellipses',
-    width: '400px',
+    width: '350px',
 }
 
 const mapCenter = {
@@ -22,7 +27,7 @@ const mapCenter = {
     lng: -78.905869,
 }
 
-export default class CozyFiMap extends React.Component {
+export default class FormMap extends React.Component {
   constructor() {
       super();
       //BINDS THIS TO EACH FUNCTION
@@ -51,6 +56,7 @@ export default class CozyFiMap extends React.Component {
 
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
+    const placeId = places[0].id;
     const markers = [];
 
     // Add a marker for each place returned from search bar
@@ -65,8 +71,10 @@ export default class CozyFiMap extends React.Component {
 
     this.setState({
       center: mapCenter,
-      markers,
+      markers
     });
+
+    this.props.dispatch(actions.setCurrentPlace(placeId));
   }
 
   initMap() {
@@ -102,8 +110,8 @@ export default class CozyFiMap extends React.Component {
         center={this.state.center}
         containerProps={{
           style: {
-            height: '750px',
-            width: '900px',
+            height: '400px',
+            width: '450px',
           },
         }}
         defaultZoom={15}
@@ -128,3 +136,10 @@ export default class CozyFiMap extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+    return {state: state}
+}
+
+const Container = connect(mapStateToProps)(FormMap);
+export default Container;
