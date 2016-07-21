@@ -14,7 +14,7 @@ const workspaceReducer = (state, action) => {
     if (action.type === 'ADD_WORKSPACE_SUCCESS') {
         let newState = update(state, {
             currentWorkspaces: { $push: [action.workspace]},
-            workspaceSaved: { $set:true },
+            workspaceSaved: { $set:true }
         });
         state = newState;
         console.log(state);
