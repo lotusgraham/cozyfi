@@ -115,8 +115,6 @@ const Form = React.createClass({
     let { wordsError, numericError, urlError } = this.errorMessages;
 
     return (
-      <div>
-
         <Paper style={paperStyle}>
           <div className="cozyFiMap" style={styles.cozyfi}> <FormMap /> </div>
           <Formsy.Form
@@ -221,7 +219,6 @@ const Form = React.createClass({
             />
           </Formsy.Form>
         </Paper>
-      </div>
     );
   },
 });

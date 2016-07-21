@@ -43,12 +43,10 @@ const NavBar = () => (
 
 const SinglePage = () => (
 
-    <div>
         <div className = "singlePage" style={styles.container}>
             <div className="cardz" style={styles.cardz}> <Cardz /> </div>
             <div className="cozyFiMap" style={styles.cozyfi}> <CozyFiMap /> </div>
         </div>
-    </div>
 );
 
 const imgUrl = 'http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg'
