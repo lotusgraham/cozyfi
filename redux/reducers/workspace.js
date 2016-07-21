@@ -5,7 +5,7 @@ var setCurrentPlace = require('../actions/workspace').setCurrentPlace;
 
 const initialState = {
 	currentWorkspaces: [],
-    currentPlace: null
+    currentPlace: null,
 	workspaceSaved: false,
 };
 
