@@ -6,7 +6,7 @@ var setCurrentPlace = require('../actions/workspace').setCurrentPlace;
 const initialState = {
 	currentWorkspaces: [],
     currentPlace: null,
-	workspaceSaved: false,
+	workspaceSaved: false
 };
 
 const workspaceReducer = (state, action) => {
