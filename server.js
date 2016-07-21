@@ -12,7 +12,11 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(express.static('public'));
+app.use(express.static('build'));
+
+app.get('/*', function(req, res){
+  res.sendFile(__dirname + '/build/index.html');
+});
 
 app.post('/workspaces', (req, res) => {
     res.json(req.body);
