@@ -14,11 +14,11 @@ const setCurrentPlace = (place) => {
 	}
 }
 
-function addWorkspace(workspace) {
+const addWorkspace = (workspace) => {
 	return function(dispatch) {
 		let workspacesRef = firebaseApp.ref('/workspaces/');
 		let testContent = {
-			"Google Places": "AvalancheCafe",
+			"description": "short description",
 			"hasWifi": false,
 			"hasCaffeine": false,
 			"hasFood": false,
@@ -26,6 +26,7 @@ function addWorkspace(workspace) {
 			"hasTableSpace": true,
 			"hasOutdoorSpace": false,
 			"isQuiet": false,
+			"isAccessible": false,
 			"quirks": "quirky",
 			"perks": "perky",
 			"directions": "directy"

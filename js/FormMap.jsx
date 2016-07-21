@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import {connect} from 'react-redux';
+
+import * as actions from '../redux/actions/workspace.js';
+import store from '../redux/store.js';
 
 import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
@@ -52,6 +56,7 @@ export default class FormMap extends React.Component {
 
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
+    const placeId = places[0].id;
     const markers = [];
 
     // Add a marker for each place returned from search bar
@@ -66,8 +71,10 @@ export default class FormMap extends React.Component {
 
     this.setState({
       center: mapCenter,
-      markers,
+      markers
     });
+
+    this.props.dispatch(actions.setCurrentPlace(placeId));
   }
 
   initMap() {
@@ -129,3 +136,10 @@ export default class FormMap extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+    return {state: state}
+}
+
+const Container = connect(mapStateToProps)(FormMap);
+export default Container;

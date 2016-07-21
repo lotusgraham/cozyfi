@@ -115,8 +115,6 @@ const Form = React.createClass({
     let { wordsError, numericError, urlError } = this.errorMessages;
 
     return (
-      <div>
-
         <Paper style={paperStyle}>
           <div className="cozyFiMap" style={styles.cozyfi}> <FormMap /> </div>
           <Formsy.Form
@@ -126,18 +124,27 @@ const Form = React.createClass({
             onInvalidSubmit={this.notifyFormError}
           >
           <FormsyText
+            name="Short Descrition"
+            validations="isNumeric"
+            hintText="In your own words, provide a short description. (this is displayed with the title.)"
+            floatingLabelText="Short Descrition"
+            multiLine={true}
+            fullWidth={true}
+            rows={2}
+          />
+          <FormsyText
             name="Quirks?"
             validations="isNumeric"
-            hintText="      Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
+            hintText="Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
             floatingLabelText="Quirks"
             multiLine={true}
             fullWidth={true}
             rows={2}
           />
           <FormsyText
-            name="Perks?"
+            name="perks"
             validations="isNumeric"
-            hintText="      What are your favorite things about this space? Why do you love to work here? "
+            hintText="What are your favorite things about this space? Why do you love to work here? "
             floatingLabelText="Perks"
             multiLine={true}
             fullWidth={true}
@@ -145,7 +152,7 @@ const Form = React.createClass({
 
           />
           <FormsyText
-            name="Additional Specific Directions Needed?"
+            name="direct"
             validations="isWords"
             validationError={wordsError}
             hintText="      Any specific directions needed to find this place?"
@@ -160,42 +167,47 @@ const Form = React.createClass({
             <br></br>
             </div>
             <FormsyCheckbox
-              name="wifi"
+              name="hasWifi"
               label="Fast Wifi"
               style={switchStyle}
             />
             <FormsyCheckbox
-                name="agree"
+                name="hasCaffeine"
                 label="Caffiene"
                 style={switchStyle}
                 checked={false}
               />
               <FormsyCheckbox
-                  name="agree"
+                  name="hasFood"
                   label="Food"
                   style={switchStyle}
                 />
             <FormsyCheckbox
-                  name="agree"
+                  name="hasOutlets"
                   label="Outlets"
                   style={switchStyle}
                   defaultChecked={true}
               />
             <FormsyCheckbox
-                name="agree"
+                name="hasTableSpace"
                 label="Table Space"
                 style={switchStyle}
                 defaultChecked={true}
 
               />
               <FormsyCheckbox
-                    name="agree"
+                    name="hasOutdoorSpace"
                     label="Outdoors"
                     style={switchStyle}
                 />
               <FormsyCheckbox
-                  name="agree"
+                  name="isQuiet"
                   label="Quiet"
+                  style={switchStyle}
+                />
+              <FormsyCheckbox
+                  name="isAccessible"
+                  label="Accessible"
                   style={switchStyle}
                 />
 
@@ -207,7 +219,6 @@ const Form = React.createClass({
             />
           </Formsy.Form>
         </Paper>
-      </div>
     );
   },
 });
