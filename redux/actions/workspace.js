@@ -64,7 +64,10 @@ const addWorkspace = (workspace) => {
 	}
 }
 
+exports.getMapPlace = getMapPlace;
+exports.getMapPlaceSuccess = getMapPlaceSuccess;
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
+
 exports.setCurrentPlace = setCurrentPlace;
