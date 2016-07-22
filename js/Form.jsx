@@ -1,12 +1,18 @@
 import React from 'react';
+
+import {connect} from 'react-redux';
+import * as actions from '../redux/actions/workspace.js';
+import store from '../redux/store.js';
+
 import Formsy from 'formsy-react';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
     FormsySelect, FormsyText, FormsyTime, FormsyToggle } from 'formsy-material-ui/lib';
-    import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
-import FormMap from './FormMap'
+import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
+
+import FormMap from './FormMap';
 
     const searchStyles = {
         border: '1px solid transparent',
@@ -103,7 +109,7 @@ const Form = React.createClass({
   },
 
   submitForm(data) {
-    alert(JSON.stringify(data, null, 4));
+    this.props.dispatch(actions.addWorkspace(data));
   },
 
   notifyFormError(data) {
@@ -115,8 +121,6 @@ const Form = React.createClass({
     let { wordsError, numericError, urlError } = this.errorMessages;
 
     return (
-      <div>
-
         <Paper style={paperStyle}>
           <div className="cozyFiMap" style={styles.cozyfi}> <FormMap /> </div>
           <Formsy.Form
@@ -221,9 +225,16 @@ const Form = React.createClass({
             />
           </Formsy.Form>
         </Paper>
-      </div>
     );
   },
 });
 
-export default Form;
+const mapStateToProps = (state, props) => {
+    return {
+        state: state
+    }
+};
+
+const Container = connect(mapStateToProps)(Form);
+
+export default Container;
