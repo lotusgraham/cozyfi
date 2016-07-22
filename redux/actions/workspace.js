@@ -90,8 +90,10 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
-exports.getMapPlace = getMapPlace;
-exports.getMapPlaceSuccess = getMapPlaceSuccess;
+// exports.getMapPlace = getMapPlace;
+// exports.getMapPlaceSuccess = getMapPlaceSuccess;
+
+exports.setCurrentPlace = setCurrentPlace;
 
 exports.getWorkspaces = getWorkspaces;
 exports.getWorkspacesSuccess = getWorkspacesSuccess;
@@ -101,5 +103,3 @@ exports.addWorkspaceSuccess = addWorkspaceSuccess;
 
 exports.removeWorkspace = removeWorkspace;
 exports.removeWorkspaceSuccess = removeWorkspaceSuccess;
-
-exports.setCurrentPlace = setCurrentPlace;
