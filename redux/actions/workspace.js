@@ -27,18 +27,11 @@ const getMapPlaceSuccess = (place) => {
     }
 }
 
-const addWorkspaceSuccess = (workspace) => {
-	return {
-		type: 'ADD_WORKSPACE_SUCCESS',
-		workspace
-	};
-};
-
 const setCurrentPlace = (place) => {
-	return {
-		type: 'SET_CURRENT_PLACE',
-		place
-	}
+    return {
+        type: 'SET_CURRENT_PLACE',
+        place
+    }
 }
 
 const getWorkspaces = (filterParams) => {
@@ -61,13 +54,23 @@ const getWorkspacesSuccess = (workspaces) => {
 }
 
 const addWorkspace = (workspace) => {
-	return function(dispatch) {
-		let workspacesRef = firebaseApp.ref('/workspaces/');
-		dispatch(addWorkspaceSuccess(workspace));
-		workspacesRef.push(workspace);
+    return function(dispatch) {
+        let workspacesRef = firebaseApp.ref('/workspaces/');
+        dispatch(addWorkspaceSuccess(workspace));
+        workspacesRef.push(workspace);
 
-	}
-}
+    }
+};
+
+const addWorkspaceSuccess = (workspace) => {
+    return {
+        type: 'ADD_WORKSPACE_SUCCESS',
+        workspace
+    };
+};
+
+
+
 
 const removeWorkspace = (workspaceId, workspaceIndex) => {
     // assumes index of array of current workspaces can be captured at dispatch time.
