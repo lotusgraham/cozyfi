@@ -41,23 +41,27 @@ const setCurrentPlace = (place) => {
 	}
 }
 
+const getWorkspaces = (filterParams) => {
+    return (dispatch) => {
+        let workspacesRef = firebaseApp.ref('/workspaces/');
+        workspacesRef.once('value').then(snapshot => {
+            const data = snapshot.val();
+            const workspaces = Object.keys(data).map(key => data[key]);
+            dispatch(getWorkspacesSuccess(workspaces));
+        });
+    }
+}
+
+const getWorkspacesSuccess = (workspaces) => {
+    return {
+        type: 'GET_WORKSPACES_SUCCESS',
+        workspaces
+    }
+}
+
 const addWorkspace = (workspace) => {
 	return function(dispatch) {
 		let workspacesRef = firebaseApp.ref('/workspaces/');
-		let testContent = {
-			"description": "short description",
-			"hasWifi": false,
-			"hasCaffeine": false,
-			"hasFood": false,
-			"hasOutlets": true,
-			"hasTableSpace": true,
-			"hasOutdoorSpace": false,
-			"isQuiet": false,
-			"isAccessible": false,
-			"quirks": "quirky",
-			"perks": "perky",
-			"directions": "directy"
-		}
 		dispatch(addWorkspaceSuccess(workspace));
 		workspacesRef.push(workspace);
 
@@ -66,6 +70,9 @@ const addWorkspace = (workspace) => {
 
 exports.getMapPlace = getMapPlace;
 exports.getMapPlaceSuccess = getMapPlaceSuccess;
+
+exports.getWorkspaces = getWorkspaces;
+exports.getWorkspacesSuccess = getWorkspacesSuccess;
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
