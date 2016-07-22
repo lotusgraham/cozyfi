@@ -8,7 +8,7 @@ const initialState = {
 	currentPlace: null,
 	currentWorkspaces: [],
 	workspaceSaved: false,
-    GooglePlaces: null,
+    GooglePlaces: [],
     hasFastWifi: null,
     hasCaffeine: null,
     hasTableSpace: null,
@@ -46,15 +46,12 @@ const workspaceReducer = (state, action) => {
 		currentPlace: {$set: action.place}
 		})
 		state = newState;
-		console.log('SET_CURRENT_PLACE', state);
-        var placeID = state.currentPlace + '';
-        console.log(placeID);
-        var apiKey = 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ';
-        var gMaps = 'https://maps.googleapis.com/maps/api/place/details/json?placeid=' + placeID + '&key='+ apiKey;
-        console.log(gMaps);
-        // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=';
-        // 'https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&key=AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ';
-	}
+    }
+    if (action.type === 'GET_MAP_PLACE_SCCESS') {
+        let newState = update(state, {
+            GooglePlaces: {$push: action.place}
+        })
+    }
     return state;
 };
 
