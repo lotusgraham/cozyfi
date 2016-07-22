@@ -47,6 +47,7 @@ const getWorkspaces = (filterParams) => {
         workspacesRef.once('value').then(snapshot => {
             const data = snapshot.val();
             const workspaces = Object.keys(data).map(key => data[key]);
+            console.log(workspaces);
             dispatch(getWorkspacesSuccess(workspaces));
         });
     }
@@ -68,6 +69,23 @@ const addWorkspace = (workspace) => {
 	}
 }
 
+const removeWorkspace = (workspaceId, workspaceIndex) => {
+    return function(dispatch) {
+        let workspaceRef = firebaseApp.ref('/workspaces/').child(workspaceId);
+        workspaceRef.remove().then(() => {
+            dispatch(removeWorkspaceSuccess(workspaceIndex));
+        })
+
+    }
+};
+
+const removeWorkspaceSuccess = (index) => {
+    return {
+        type: 'REMOVE_WORKSPACE_SUCCESS',
+        index
+    }
+};
+
 exports.getMapPlace = getMapPlace;
 exports.getMapPlaceSuccess = getMapPlaceSuccess;
 
@@ -76,5 +94,8 @@ exports.getWorkspacesSuccess = getWorkspacesSuccess;
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
+
+exports.removeWorkspace = removeWorkspace;
+exports.removeWorkspaceSuccess = removeWorkspaceSuccess;
 
 exports.setCurrentPlace = setCurrentPlace;

@@ -1,19 +1,16 @@
-var addWorkspaceSuccess = require('../actions/workspace').addWorkspaceSuccess;
-var addWorkspace = require('../actions/workspace').addWorkspace;
 var update = require('react-addons-update');
-var setCurrentPlace = require('../actions/workspace').setCurrentPlace;
 
 const initialState = {
-	currentWorkspaces: [],
+	currentWorkspaces: [0,1],
     googlePlaces: [],
     currentPlace: null,
 	workspaceSaved: false
 };
 
 const workspaceReducer = (state, action) => {
+    console.log('here');
 	state = state || initialState;
     if (action.type ==='GET_WORKSPACES_SUCCESS') {
-        console.log(action.workspaces)
         let newState = update(state, {
             currentWorkspaces: {$push: [action.workspaces]}
         });
@@ -25,11 +22,19 @@ const workspaceReducer = (state, action) => {
         });
         state = newState;
 	}
+    if (action.type === 'REMOVE_WORKSPACE_SUCCESS') {
+        console.log('THE_ACTION=======',action)
+        let newState = update(state, {
+            currentWorkspaces: {$splice: [[action.index, 1]]}
+        });
+        console.log(newState);
+    }
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
 		currentPlace: {$set: action.place}
     });
 		state = newState;
+        console.log(newState);
     }
     if (action.type === 'GET_MAP_PLACE_SCCESS') {
         let newState = update(state, {
