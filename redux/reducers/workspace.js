@@ -31,10 +31,10 @@ const workspaceReducer = (state, action) => {
 		state = newState;
         console.log(newState);
     }
-    // if (action.type === 'GET_MAP_PLACE_SCCESS') {
-    //     let newState = update(state, {
-    //         googlePlaces: {$push: action.place}
-    //     })
+    if (action.type === 'GET_MAP_PLACE_SCCESS') {
+        let newState = update(state, {
+            googlePlaces: {$push: action.place}
+        })
     }
 
     return state;

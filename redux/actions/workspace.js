@@ -1,24 +1,24 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
-// const getMapPlace = (placeId) => {
-//     return (dispatch) => {
-//         let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
-//             query = {
-//             placed:  placeId,
-//             key: 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ'
-//         },
-//             params = Object.keys(query)
-//                 .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
-//                 .join("&")
-//                 .replace(/%20/g, "+");
-//         fetch(gMapsBaseUrl + '?' + params)
-//             .then(res => res.json())
-//         .then(place => {
-//             return dispatch(getMapPlaceSuccess(place))
-//         });
-//     }
-// }
+const getMapPlace = (placeId) => {
+    return (dispatch) => {
+        let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
+            query = {
+            placed:  placeId,
+            key: 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ'
+        },
+            params = Object.keys(query)
+                .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
+                .join("&")
+                .replace(/%20/g, "+");
+        fetch(gMapsBaseUrl + '?' + params)
+            .then(res => res.json())
+        .then(place => {
+            return dispatch(getMapPlaceSuccess(place))
+        });
+    }
+}
 
 const getMapPlaceSuccess = (place) => {
     return {
@@ -90,8 +90,8 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
-// exports.getMapPlace = getMapPlace;
-// exports.getMapPlaceSuccess = getMapPlaceSuccess;
+exports.getMapPlace = getMapPlace;
+exports.getMapPlaceSuccess = getMapPlaceSuccess;
 
 exports.setCurrentPlace = setCurrentPlace;
 
