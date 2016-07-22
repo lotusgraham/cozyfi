@@ -8,11 +8,11 @@ const initialState = {
 
 const workspaceReducer = (state, action) => {
 	state = state || initialState;
-    // if (action.type ==='GET_WORKSPACES_SUCCESS') {
-    //     let newState = update(state, {
-    //         placeIdCache: {$push: [action.workspaces]}
-    //     });
-    // }
+    if (action.type ==='GET_WORKSPACES_SUCCESS') {
+        let newState = update(state, {
+            placeIdCache: {$push: [action.workspaces]}
+        });
+    }
     if (action.type === 'ADD_WORKSPACE_SUCCESS') {
         let newState = update(state, {
             placeIdCache: { $push: [action.workspace]},
@@ -32,10 +32,10 @@ const workspaceReducer = (state, action) => {
 		state = newState;
         console.log(newState);
     }
-    if (action.type === 'GET_MAP_PLACE_SCCESS') {
-        let newState = update(state, {
-            googlePlaces: {$push: action.place}
-        })
+    // if (action.type === 'GET_MAP_PLACE_SCCESS') {
+    //     let newState = update(state, {
+    //         googlePlaces: {$push: action.place}
+    //     })
     }
 
     return state;
