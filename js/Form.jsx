@@ -30,13 +30,6 @@ import FormMap from './FormMap';
     }
 
     const styles = {
-        root: {
-            flex: .5,
-            flexDirection: 'row',
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around'
-        },
         cozyFi: {
             "border": `1px solid transparent`,
             "borderRadius": `1px`,
