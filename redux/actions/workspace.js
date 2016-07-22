@@ -1,4 +1,12 @@
 var firebaseApp = require('../../js/Firebase.jsx');
+require('isomorphic-fetch');
+
+const getMapPlaceSuccess = (place) => {
+    return {
+        type: 'GET_MAP_PLACE_SCCESS',
+        place
+    }
+}
 
 const addWorkspaceSuccess = (workspace) => {
 	return {
