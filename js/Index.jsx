@@ -71,7 +71,6 @@ const styles = {
         flexDirection: 'row',
         display: 'flex',
         justifyContent: 'flex-end',
-        // width: '100%',
         height: 750,
         overflowY: 'auto',
         marginBottom: 24,
@@ -102,6 +101,7 @@ const styles = {
 
 export default class Cardz extends React.Component {
   constructor(props) {
+
     super(props);
     this.state = {
       tilesData: [
@@ -172,41 +172,13 @@ export default class Cardz extends React.Component {
       ]
     };
   }
-  handleExpandChange(expanded) {
-    // var newState = update(this.state, {0: {expanded: {$set: expanded}}})
-    // // this.update(this.state.tilesData[0].expanded, {$set: true});
-    // this.setState(newState);
-    // this.setState({expanded: expanded});
-  };
-
-// TODO:log state log this.state
 
   handleToggle(toggle, index, event) {
     var newState = update(this.state, {tilesData: {[index]: {expanded: {$set: toggle}}}})
-    // this.update(this.state.tilesData[0].expanded, {$set: true});
     console.log(index)
 
     this.setState(newState);
-    // this.setState({expanded: toggle});
   };
-
-// update(state1, {$push: ['y']})
-
-  handleExpand() {
-    // var newState = update(this.state, {tilesData: {0: {expanded: {$set: true}}})
-    // // this.update(this.state.tilesData[0].expanded, {$set: true});
-    // this.setState(newState);
-
-  };
-
-  handleReduce() {
-    // var newState = update(this.state, {tilesData: {0: {expanded: {$set: false}}}})
-    // // this.update(this.state.tilesData[0].expanded, {$set: true});
-    // this.setState(newState);
-
-        // this.setState({expanded: false});
-  };
-
 
   render() {
     return (
@@ -243,26 +215,10 @@ export default class Cardz extends React.Component {
         </CardActions>
       </Card>
     ))}
-
-
       </div>
     );
   }
 }
-
-
-//
-// const App = () => (
-//
-//   <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-//       <SinglePage />
-//   </MuiThemeProvider>
-// );
-//
-//
-// document.addEventListener('DOMContentLoaded', function() {
-//     ReactDOM.render(<App />, document.getElementById('app'));
-// });
 
 
 const App = (props) => (
@@ -276,11 +232,6 @@ const App = (props) => (
         </div>
     </div>
 );
-
-
-
-
-
 
 const routes = (
   <Provider store={store}>
