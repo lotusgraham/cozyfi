@@ -101,8 +101,10 @@ const Form = React.createClass({
     });
   },
 
-  submitForm(data) {
-    this.props.dispatch(actions.addWorkspace(data));
+  submitForm(formData) {
+      let completeWorkspace = Object.assign({}, formData, {placeId: this.props.state.currentPlace})
+
+      this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },
 
   notifyFormError(data) {
@@ -214,7 +216,7 @@ const Form = React.createClass({
               style={submitStyle}
               type="submit"
               label="Submit"
-              disabled={!this.state.canSubmit}
+              disabled={false}
             />
           </Formsy.Form>
         </Paper>
