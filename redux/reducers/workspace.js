@@ -5,6 +5,7 @@ var setCurrentPlace = require('../actions/workspace').setCurrentPlace;
 
 const initialState = {
 	currentWorkspaces: [],
+    googlePlaces: [],
     currentPlace: null,
 	workspaceSaved: false
 };
@@ -24,7 +25,12 @@ const workspaceReducer = (state, action) => {
 		currentPlace: {$set: action.place}
 		})
 		state = newState;
-	}
+    }
+    if (action.type === 'GET_MAP_PLACE_SCCESS') {
+        let newState = update(state, {
+            googlePlaces: {$push: action.place}
+        })
+    }
     return state;
 };
 
