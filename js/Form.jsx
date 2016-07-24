@@ -125,8 +125,7 @@ const Form = React.createClass({
             onInvalidSubmit={this.notifyFormError}
           >
           <FormsyText
-            name="Short Descrition"
-            validations="isNumeric"
+            name="description"
             hintText="In your own words, provide a short description. (this is displayed with the title.)"
             floatingLabelText="Short Descrition"
             multiLine={true}
@@ -134,8 +133,7 @@ const Form = React.createClass({
             rows={2}
           />
           <FormsyText
-            name="Quirks?"
-            validations="isNumeric"
+            name="quirks"
             hintText="Is this space lacking anything crucial? Does the Wifi ever let you down? Is there somethign we should know??"
             floatingLabelText="Quirks"
             multiLine={true}
@@ -144,7 +142,6 @@ const Form = React.createClass({
           />
           <FormsyText
             name="perks"
-            validations="isNumeric"
             hintText="What are your favorite things about this space? Why do you love to work here? "
             floatingLabelText="Perks"
             multiLine={true}
@@ -153,9 +150,7 @@ const Form = React.createClass({
 
           />
           <FormsyText
-            name="direct"
-            validations="isWords"
-            validationError={wordsError}
+            name="directions"
             hintText="      Any specific directions needed to find this place?"
             floatingLabelText="Directions"
             multiLine={true}
