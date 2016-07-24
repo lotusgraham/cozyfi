@@ -1,7 +1,7 @@
 var update = require('react-addons-update');
 
 const initialState = {
-	workspaceCache [],
+	workspaceCache: [],
     placeId: null,
 	workspaceSaved: false
 };
@@ -10,7 +10,7 @@ const workspaceReducer = (state, action) => {
 	state = state || initialState;
     if (action.type ==='GET_WORKSPACES_SUCCESS') {
         let newState = update(state, {
-            workspaceCache {$push: [action.workspaces]}
+            workspaceCache: {$push: [action.workspaces]}
         });
     }
     if (action.type === 'ADD_WORKSPACE_SUCCESS') {
@@ -21,7 +21,7 @@ const workspaceReducer = (state, action) => {
 	}
     if (action.type === 'REMOVE_WORKSPACE_SUCCESS') {
         let newState = update(state, {
-            workspaceCache {$splice: [[action.index, 1]]}
+            workspaceCache: {$splice: [[action.index, 1]]}
         });
     }
 	if (action.type === 'SET_CURRENT_PLACE') {
