@@ -1,7 +1,7 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
-const mapWorkspaces = (workspaces) => {
+const fetchMapData = (workspaces) => {
     return (dispatch) => {
         // nest this in a loop; perform this work on array
         let workspace = {
@@ -39,9 +39,9 @@ const mapWorkspaces = (workspaces) => {
     }
 }
 
-const mapWorkspaceDataSuccess = (place) => {
+const fetchMapDataSuccess = (workspaces) => {
     return {
-        type: 'GET_MAP_PLACE_SUCCESS',
+        type: 'FETCH_MAP_DATA_SUCCESS',
         place
     }
 }
@@ -67,7 +67,7 @@ const fetchWorkspaceData = (filterParams) => {
         workspacesRef.once('value').then(snapshot => {
         const data = snapshot.val();
         const workspaces = Object.keys(data).map(key => data[key]);
-            dispatch(mapWorkspaces(workspaces));
+            dispatch(fetchMapData(workspaces));
         });
     }
 }
@@ -116,8 +116,8 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
-exports.mapWorkspaces = mapWorkspaces;
-exports.mapWorkspacessSuccess = mapWorkspacesSuccess;
+exports.fetchMapData = fetchMapData;
+exports.fetchMapDatasSuccess = fetchMapDataSuccess;
 
 exports.setCurrentPlace = setCurrentPlace;
 
