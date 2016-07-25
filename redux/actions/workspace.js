@@ -22,7 +22,7 @@ const getMapPlace = (placeId) => {
 
 const getMapPlaceSuccess = (place) => {
     return {
-        type: 'GET_MAP_PLACE_SCCESS',
+        type: 'GET_MAP_PLACE_SUCCESS',
         place
     }
 }
