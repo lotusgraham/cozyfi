@@ -3,7 +3,7 @@ require('isomorphic-fetch');
 
 const mapWorkspaces = (workspaces) => {
     return (dispatch) => {
-        // nest this in a loop!
+        // nest this in a loop; perform this work on array
         let workspace = {
             "placeId":"ChIJ9-25gKYsDogRWBT2lu-OSi0",
             "description": "short description",
@@ -39,7 +39,7 @@ const mapWorkspaces = (workspaces) => {
     }
 }
 
-const getMapPlaceSuccess = (place) => {
+const mapWorkspaceDataSuccess = (place) => {
     return {
         type: 'GET_MAP_PLACE_SUCCESS',
         place
@@ -117,7 +117,7 @@ const removeWorkspaceSuccess = (index) => {
 };
 
 exports.mapWorkspaces = mapWorkspaces;
-// exports.mapWorkspacessSuccess = mapWorkspacesSuccess;
+exports.mapWorkspacessSuccess = mapWorkspacesSuccess;
 
 exports.setCurrentPlace = setCurrentPlace;
 
