@@ -11,6 +11,7 @@ const styles = {cardz: {
 }
 }
 
+
 class Cardz extends React.Component {
   constructor(props) {
     super(props);
@@ -92,41 +93,7 @@ class Cardz extends React.Component {
   };
 
   componentWillMount() {
-      var tiles = [];
       this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
-      this.props.state.workspaceCache.map((tile, index) => {
-
-          <Card
-            onClick={this.handleToggle.bind(this, !tile.expanded, index)}
-            expanded={tile.expanded}
-            onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
-            <CardHeader
-              title={tile.name}
-              subtitle={tile.desc}
-              avatar={tile.avatar}
-              actAsExpander={true}
-              showExpandableButton={true}
-            />
-            <CardText>
-            </CardText>
-            <CardMedia
-              inlineStyle={styles.cardz}
-              expandable={true}
-              overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
-            >
-              <img src={tile.img} />
-            </CardMedia>
-            <CardTitle title="Card title" subtitle="Card subtitle" expandable={true} />
-            <CardText expandable={true}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-              Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-              Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-            </CardText>
-            <CardActions>
-            </CardActions>
-          </Card>
-      })
 
 
   };
@@ -145,6 +112,40 @@ updateCard() {
 };
 
   render() {
+    var tiles = this.props.state.workspaceCache.map((tile, index) => {
+      console.log('strung: ', tile);
+      return(
+      <Card
+          onClick={this.handleToggle.bind(this, !tile.expanded, index)}
+          expanded="{tile.expanded}"
+          onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
+          <CardHeader
+            title="{tile.placeId}"
+            subtitle="{tile.desc}"
+            avatar="{tile.avatar}"
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText>
+          </CardText>
+          <CardMedia
+            inlineStyle={styles.cardz}
+            expandable={true}
+            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+          >
+            <img src="{tile.img}" />
+          </CardMedia>
+          <CardTitle title="Card title" subtitle="Card subtitle" expandable={true} />
+          <CardText expandable={true}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
+            Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
+            Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+          </CardText>
+          <CardActions>
+          </CardActions>
+        </Card>)
+    })
     return (
         <div>
             {tiles}

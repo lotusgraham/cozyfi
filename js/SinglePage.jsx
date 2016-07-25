@@ -47,6 +47,8 @@ const styles = {
 
 }
 
+// toggle={this.props.state.tilesData[index].expanded} 
+
 const SinglePage = () => (
         <div className = "singlePage" style={styles.container}>
             <div className="cardz" style={styles.cardz}> <Cardz/> </div>
