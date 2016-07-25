@@ -95,6 +95,19 @@ class Cardz extends React.Component {
       this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
   };
 
+updateCard() {
+    var newState = update(this.state, {
+        tilesData: {
+            [index]: {
+                placeId: {
+                    $set: this.props.actions.workspace.currentPlace
+                }
+            }
+        }
+    })
+    this.setState(newState);
+};
+
   render() {
     return (
       <div>
@@ -102,7 +115,7 @@ class Cardz extends React.Component {
       <Card
         onClick={this.handleToggle.bind(this, !tile.expanded, index)}
         expanded={tile.expanded}
-        onExpandChange={this.handleExpandChange}>
+        onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
         <CardHeader
           title={tile.title}
           subtitle={tile.subtitle}
