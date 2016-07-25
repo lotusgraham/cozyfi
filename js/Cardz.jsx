@@ -96,6 +96,7 @@ class Cardz extends React.Component {
       this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
 
 
+
   };
 
 updateCard() {
@@ -120,7 +121,7 @@ updateCard() {
           expanded="{tile.expanded}"
           onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
           <CardHeader
-            title="{tile.placeId}"
+            title={tile.placeData}
             subtitle="{tile.desc}"
             avatar="{tile.avatar}"
             actAsExpander={true}
@@ -131,7 +132,7 @@ updateCard() {
           <CardMedia
             inlineStyle={styles.cardz}
             expandable={true}
-            overlay={<CardTitle title="Overlay title" subtitle="Overlay subtitle" />}
+            overlay={<CardTitle title={tile.placeData} subtitle="Overlay subtitle" />}
           >
             <img src="{tile.img}" />
           </CardMedia>
