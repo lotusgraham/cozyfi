@@ -49,7 +49,7 @@ const styles = {
 
 const SinglePage = () => (
         <div className = "singlePage" style={styles.container}>
-            <div className="cardz" style={styles.cardz}> <Cardz currentplace ={actions.workspaces.placeId} /> </div>
+            <div className="cardz" style={styles.cardz}> <Cardz/> </div>
             <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /> </div>
         </div>
 );
