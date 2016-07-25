@@ -3,6 +3,7 @@ require('isomorphic-fetch');
 
 const mapWorkspaces = (workspaces) => {
     return (dispatch) => {
+        // nest this in a loop!
             let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
                 query = {
                 placeid:  'ChIJ7zbMpZpZwoARjbdOvuQKcn8',
@@ -13,9 +14,7 @@ const mapWorkspaces = (workspaces) => {
                     .join("&")
                     .replace(/%20/g, "+");
             fetch(gMapsBaseUrl + '?' + params)
-                .then(res => {
-                    return res.json()
-                })
+                .then(res => res.json())
                 .then(res => console.log(res.result.formatted_address));
     }
 }
@@ -41,7 +40,7 @@ const setCurrentPlace = (placeId) => {
     }
 }
 
-const getWorkspaces = (filterParams) => {
+const fetchWorkspaceData = (filterParams) => {
     return (dispatch) => {
         let placesArray = []
         let workspacesRef = firebaseApp.ref('/workspaces/');
@@ -53,9 +52,9 @@ const getWorkspaces = (filterParams) => {
     }
 }
 
-const getWorkspacesSuccess = (workspaces) => {
+const fetchWorkspaceDataSuccess = (workspaces) => {
     return {
-        type: 'GET_WORKSPACES_SUCCESS',
+        type: FETCH_WORKSPACE_DATA_SUCCESS,
         workspaces
     }
 }
@@ -102,8 +101,8 @@ exports.mapWorkspaces = mapWorkspaces;
 
 exports.setCurrentPlace = setCurrentPlace;
 
-exports.getWorkspaces = getWorkspaces;
-exports.getWorkspacesSuccess = getWorkspacesSuccess;
+exports.fetchWorkspaceData = fetchWorkspaceData;
+exports.fetchWorkspaceDataSuccess = fetchWorkspaceDataSuccess;
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;

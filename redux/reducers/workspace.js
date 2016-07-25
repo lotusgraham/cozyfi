@@ -9,7 +9,7 @@ const initialState = {
 
 const workspaceReducer = (state, action) => {
 	state = state || initialState;
-    if (action.type ==='GET_WORKSPACES_SUCCESS') {
+    if (action.type ===FETCH_WORKSPACE_DATA_SUCCESS) {
         let newState = update(state, {
             workspaceCache: {$push: action.workspaces}
         });
