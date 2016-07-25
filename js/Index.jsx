@@ -2,7 +2,7 @@
 import React from 'react';
 import { render } from 'react-dom'
 import {IndexRoute, Router, Route, Link, browserHistory } from 'react-router';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 
@@ -21,11 +21,10 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 
 //App components.
-import CozyFiMap from './cozyfimap.jsx';
 import store from '../redux/store';
 import Form from './Form';
+import SinglePage from './SinglePage';
 import * as actions from '../redux/actions/workspace.js';
-import Cardz from './Cardz';
 // import {Container as Cardz} from './Cardz.jsx';
 
 const NavBar = () => (
@@ -42,14 +41,6 @@ const NavBar = () => (
   </AppBar>
 );
 
-
-const SinglePage = () => (
-
-        <div className = "singlePage" style={styles.container}>
-            <div className="cardz" style={styles.cardz}> <Cardz /> </div>
-            <div className="cozyFiMap" style={styles.cozyfi}> <CozyFiMap /> </div>
-        </div>
-);
 
 const imgUrl = 'http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg'
 
@@ -109,6 +100,12 @@ const App = (props) => (
         </div>
     </div>
 );
+
+const mapStateToProps = (state, props) => {
+    return {state: state}
+}
+
+const Container = connect(mapStateToProps)(App);
 
 const routes = (
   <Provider store={store}>
