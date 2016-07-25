@@ -114,6 +114,8 @@ exports.fetchWorkspaceDataSuccess = fetchWorkspaceDataSuccess;
 exports.fetchMapData = fetchMapData;
 exports.fetchMapDatasSuccess = fetchMapDataSuccess;
 
+exports.updateWorkspaceCache = updateWorkspaceCache;
+
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
 
