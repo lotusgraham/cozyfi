@@ -6,11 +6,10 @@ import store from '../redux/store.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import update from 'react-addons-update';
 
-const styles = {
-    cardz: {
-        maxHeight: 500
-    }
-};
+const styles = {cardz: {
+    maxHeight: 500
+}
+}
 
 class Cardz extends React.Component {
   constructor(props) {
@@ -92,9 +91,9 @@ class Cardz extends React.Component {
     this.setState(newState);
   };
 
-  // componentWillMount() {
-  //     this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
-  // };
+  componentWillMount() {
+      this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
+  };
 
   render() {
     return (
