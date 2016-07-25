@@ -23,6 +23,6 @@ let testContent = {
     "directions": "directy"
 }
 
-// store.dispatch(getWorkspaces());
+store.dispatch(getWorkspaces());
 // store.dispatch(addWorkspace(testContent));
-store.dispatch(removeWorkspace('-KNGca9relU4AIY_I8Nl', 1))
+// store.dispatch(removeWorkspace('-KNGca9relU4AIY_I8Nl', 1))
