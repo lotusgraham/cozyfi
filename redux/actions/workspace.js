@@ -21,12 +21,12 @@ const fetchWorkspaceData = (filterParams) => {
     }
 }
 
-const fetchWorkspaceDataSuccess = (workspaces) => {
-    return {
-        type: 'FETCH_WORKSPACE_DATA_SUCCESS',
-        workspaces
-    }
-}
+// const fetchWorkspaceDataSuccess = (workspaces) => {
+//     return {
+//         type: 'FETCH_WORKSPACE_DATA_SUCCESS',
+//         workspaces
+//     }
+// }
 
 const fetchMapData = (workspaces) => {
     return (dispatch) => {
@@ -60,13 +60,16 @@ const fetchMapData = (workspaces) => {
         .then(res => {
             let workspacesWithGData =
             Object.assign({}, workspace, {googleData: res.result});
-            return dispatch(fetchMapDataSuccess(workspacesWithGData));
+            return dispatch(updateWorkspaceCache(workspacesWithGData));
         });
     }
 }
 
-const fetchMapDataSuccess = (workspaces) => {
-    return dispatch(updateWorkspaceCache)
+const updateWorkspaceCache = (workspaces) => {
+    return {
+        type: 'UPDATE_WORKSPACE_CACHE',
+        workspaces
+    }
 }
 
 const addWorkspace = (workspace) => {
