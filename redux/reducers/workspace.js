@@ -28,7 +28,7 @@ const workspaceReducer = (state, action) => {
     }
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
-		currentPlace: {$set: action.place}
+		currentPlace: {$set: action.placeId}
     });
 		state = newState;
     }
@@ -38,7 +38,6 @@ const workspaceReducer = (state, action) => {
         });
         state = newState;
     }
-    console.log(state);
     return state;
 };
 

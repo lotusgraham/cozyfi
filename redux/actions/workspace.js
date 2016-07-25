@@ -1,6 +1,32 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
+const mapWorkspaces = (workspaces) => {
+    return (dispatch) => {
+            let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
+                query = {
+                placeid:  'ChIJ7zbMpZpZwoARjbdOvuQKcn8',
+                key: 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ'
+            },
+                params = Object.keys(query)
+                    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
+                    .join("&")
+                    .replace(/%20/g, "+");
+            fetch(gMapsBaseUrl + '?' + params)
+                .then(res => {
+                    return res.json()
+                })
+                .then(res => console.log(res.result.formatted_address));
+    }
+}
+
+const getMapPlaceSuccess = (place) => {
+    return {
+        type: 'GET_MAP_PLACE_SUCCESS',
+        place
+    }
+}
+
 const saveMapPlaceSuccess = (place) => {
     return {
         type: 'SAVE_MAP_PLACE_SUCCESS',
@@ -8,21 +34,21 @@ const saveMapPlaceSuccess = (place) => {
     }
 }
 
-const setCurrentPlace = (place) => {
+const setCurrentPlace = (placeId) => {
     return {
         type: 'SET_CURRENT_PLACE',
-        place
+        placeId
     }
 }
 
 const getWorkspaces = (filterParams) => {
     return (dispatch) => {
+        let placesArray = []
         let workspacesRef = firebaseApp.ref('/workspaces/');
         workspacesRef.once('value').then(snapshot => {
-            const data = snapshot.val();
-            const workspaces = Object.keys(data).map(key => data[key]);
-            console.log(workspaces);
-            dispatch(getWorkspacesSuccess(workspaces));
+        const data = snapshot.val();
+        const workspaces = Object.keys(data).map(key => data[key]);
+            dispatch(mapWorkspaces(workspaces));
         });
     }
 }
@@ -71,8 +97,8 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
-// exports.saveMapPlace = saveMapPlace;
-exports.saveMapPlaceSuccess = saveMapPlaceSuccess;
+exports.mapWorkspaces = mapWorkspaces;
+// exports.mapWorkspacessSuccess = mapWorkspacesSuccess;
 
 exports.setCurrentPlace = setCurrentPlace;
 
