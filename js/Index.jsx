@@ -25,7 +25,7 @@ import CozyFiMap from './cozyfimap.jsx';
 import store from '../redux/store';
 import Form from './Form';
 import * as actions from '../redux/actions/workspace.js';
-var Cardz = require('./Cardz.jsx');
+import Cardz from './Cardz';
 // import {Container as Cardz} from './Cardz.jsx';
 
 const NavBar = () => (
@@ -81,9 +81,6 @@ const styles = {
         backgroundSize: "cover",
         WebkitTransition: 'all', // note the capital 'W' here
         msTransition: 'all' // 'ms' is the only lowercase vendor prefix
-    },
-    cardz: {
-        maxHeight: 500
     },
     cozyFi: {
         "border": `1px solid transparent`,

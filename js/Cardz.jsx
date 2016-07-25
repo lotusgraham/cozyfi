@@ -4,6 +4,13 @@ import {connect} from 'react-redux';
 import * as actions from '../redux/actions/workspace.js';
 import store from '../redux/store.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
+import update from 'react-addons-update';
+
+const styles = {
+    cardz: {
+        maxHeight: 500
+    }
+};
 
 class Cardz extends React.Component {
   constructor(props) {
@@ -76,7 +83,7 @@ class Cardz extends React.Component {
         },
       ]
     };
-  }
+};
 
   handleToggle(toggle, index, event) {
     var newState = update(this.state, {tilesData: {[index]: {expanded: {$set: toggle}}}})
@@ -130,9 +137,11 @@ class Cardz extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-    return {state: state}
+    return {
+        state: state
+    }
 };
 
-let Container = connect(mapStateToProps)(Cardz);
+const Container = connect(mapStateToProps)(Cardz);
 
 export default Container;
