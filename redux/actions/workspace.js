@@ -4,9 +4,24 @@ require('isomorphic-fetch');
 const mapWorkspaces = (workspaces) => {
     return (dispatch) => {
         // nest this in a loop!
+        let workspace = {
+            "placeId":"ChIJ9-25gKYsDogRWBT2lu-OSi0",
+            "description": "short description",
+            "hasWifi": false,
+            "hasCaffeine": false,
+            "hasFood": false,
+            "hasOutlets": true,
+            "hasTableSpace": true,
+            "hasOutdoorSpace": false,
+            "isQuiet": false,
+            "isAccessible": false,
+            "quirks": "quirky",
+            "perks": "perky",
+            "directions": "directy"
+        }
             let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
                 query = {
-                placeid:  'ChIJ7zbMpZpZwoARjbdOvuQKcn8',
+                placeid:  workspace.placeId,
                 key: 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ'
             },
                 params = Object.keys(query)
@@ -15,7 +30,12 @@ const mapWorkspaces = (workspaces) => {
                     .replace(/%20/g, "+");
             fetch(gMapsBaseUrl + '?' + params)
                 .then(res => res.json())
-                .then(res => console.log(res.result.formatted_address));
+                .then(res => {
+                    let googleData = res.result;
+                    let workspaceWithGData =
+                      Object.assign({}, workspace, {googleData: googleData});
+                      return console.log(workspaceWithGData);
+                });
     }
 }
 
@@ -54,7 +74,7 @@ const fetchWorkspaceData = (filterParams) => {
 
 const fetchWorkspaceDataSuccess = (workspaces) => {
     return {
-        type: FETCH_WORKSPACE_DATA_SUCCESS,
+        type: 'FETCH_WORKSPACE_DATA_SUCCESS',
         workspaces
     }
 }
