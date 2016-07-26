@@ -31,8 +31,25 @@ const fetchWorkspaceData = (filterParams) => {
 const fetchMapData = (workspaces) => {
     return (dispatch) => {
         // nest this in a loop; perform this work on array
-        let workspace = {
-            "placeId":"ChIJ9-25gKYsDogRWBT2lu-OSi0",
+        let mergedWorkspaces = [];
+        let workspaces = [{
+            "placeId":"ChIJ7zbMpZpZwoARjbdOvuQKcn8",
+            "googleData": null,
+            "description": "short description",
+            "hasWifi": true,
+            "hasCaffeine": true,
+            "hasFood": true,
+            "hasOutlets": true,
+            "hasTableSpace": true,
+            "hasOutdoorSpace": true,
+            "isQuiet": true,
+            "isAccessible": true,
+            "quirks": "quirky",
+            "perks": "perky",
+            "directions": "directy"
+        },{
+            "placeId":"ChIJp6fWcohcwoARrIWK0sUe-VE",
+            "googleData": null,
             "description": "short description",
             "hasWifi": false,
             "hasCaffeine": false,
@@ -45,23 +62,26 @@ const fetchMapData = (workspaces) => {
             "quirks": "quirky",
             "perks": "perky",
             "directions": "directy"
+        }]
+        for (var i = 0; i <= workspaces.length; i +=1) {
+            let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
+            query = {
+                placeid:  workspaces[i].placeId,
+                key: 'AIzaSyAxTnTQ3fTqVc3bE5MhFw7qXYq0o1NUJpo'
+            },
+            params = Object.keys(query)
+            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
+            .join("&")
+            .replace(/%20/g, "+");
+            fetch(gMapsBaseUrl + '?' + params, {headers: new Headers(), mode: 'cors'})
+            .then(res => res.json())
+            .then(res => {
+                let workspaceWithGData =
+                Object.assign({}, workspaces[i], {googleData: res.result});
+                 mergedWorkspaces.push(workspaceWithGData);
+                 return console.log(mergedWorkspaces)
+            });
         }
-        let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
-        query = {
-            placeid:  workspace.placeId,
-            key: 'AIzaSyDEW1grx0AbwSozmAu0fi7HczQn6D0UFlQ'
-        },
-        params = Object.keys(query)
-        .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
-        .join("&")
-        .replace(/%20/g, "+");
-        fetch(gMapsBaseUrl + '?' + params)
-        .then(res => res.json())
-        .then(res => {
-            let workspacesWithGData =
-            Object.assign({}, workspace, {googleData: res.result});
-            return dispatch(updateWorkspaceCache(workspacesWithGData));
-        });
     }
 }
 
@@ -109,10 +129,10 @@ const removeWorkspaceSuccess = (index) => {
 exports.setCurrentPlace = setCurrentPlace;
 
 exports.fetchWorkspaceData = fetchWorkspaceData;
-exports.fetchWorkspaceDataSuccess = fetchWorkspaceDataSuccess;
+// exports.fetchWorkspaceDataSuccess = fetchWorkspaceDataSuccess;
 
 exports.fetchMapData = fetchMapData;
-exports.fetchMapDatasSuccess = fetchMapDataSuccess;
+// exports.fetchMapDatasSuccess = fetchMapDataSuccess;
 
 exports.updateWorkspaceCache = updateWorkspaceCache;
 

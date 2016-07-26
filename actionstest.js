@@ -24,5 +24,19 @@ let testContent = {
 }
 
 store.dispatch(fetchWorkspaceData());
-// store.dispatch(addWorkspace(testContent));
+// store.dispatch(addWorkspace({
+//     "placeId":"ChIJ7zbMpZpZwoARjbdOvuQKcn8",
+//     "description": "short description",
+//     "hasWifi": true,
+//     "hasCaffeine": true,
+//     "hasFood": true,
+//     "hasOutlets": true,
+//     "hasTableSpace": true,
+//     "hasOutdoorSpace": true,
+//     "isQuiet": true,
+//     "isAccessible": true,
+//     "quirks": "quirky",
+//     "perks": "perky",
+//     "directions": "directy"
+// }));
 // store.dispatch(removeWorkspace('-KNGca9relU4AIY_I8Nl', 1))
