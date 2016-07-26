@@ -27,7 +27,7 @@ class Cardz extends React.Component {
   };
 
   componentWillMount() {
-      this.props.dispatch(actions.getWorkspaces()); // puts the data in the store
+      this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
 
 
 

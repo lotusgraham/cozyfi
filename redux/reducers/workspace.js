@@ -3,16 +3,14 @@ var update = require('react-addons-update');
 const initialState = {
 	workspaceCache: [],
     placeId: null,
-    placeData: null,
-	workspaceSaved: false
-};
+    googleData: null,
+	workspaceSaved: false,
+    placesService: new google.maps.places.PlacesService(document.createElement('div'))
+}
 
 const workspaceReducer = (state, action) => {
 	state = state || initialState;
-    if (action.type ==='GET_WORKSPACES_SUCCESS') {
-        console.log('=========')
-        console.log(action.workspaces);
-        console.log('=========')
+    if (action.type ==='UPDATE_WORKSPACE_CACHE') {
         let newState = update(state, {
             workspaceCache: {$push: action.workspaces}
         });
@@ -31,17 +29,10 @@ const workspaceReducer = (state, action) => {
     }
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
-		currentPlace: {$set: action.place}
+		currentPlace: {$set: action.placeId}
     });
 		state = newState;
     }
-    if (action.type === 'SAVE_MAP_PLACE_SUCCESS') {
-        let newState = update(state, {
-            placeData: {$set: action.place}
-        });
-        state = newState;
-    }
-    console.log(state);
     return state;
 };
 

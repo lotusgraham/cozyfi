@@ -55,9 +55,9 @@ export default class FormMap extends React.Component {
   }
 
   handlePlacesChanged() {
-      console.log('=======')
+
     const places = this.refs.searchBox.getPlaces();
-    const place = places[0];
+    const placeId = places[0].place_id;
     const markers = [];
 
     // Add a marker for each place returned from search bar
@@ -75,7 +75,7 @@ export default class FormMap extends React.Component {
       markers
     });
 
-    this.props.dispatch(actions.saveMapPlaceSuccess(place));
+    this.props.dispatch(actions.setCurrentPlace(placeId));
 
   }
 

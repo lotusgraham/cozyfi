@@ -1,35 +1,51 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
-const saveMapPlaceSuccess = (place) => {
-    return {
-        type: 'SAVE_MAP_PLACE_SUCCESS',
-        place
-    }
-}
-
-const setCurrentPlace = (place) => {
+const setCurrentPlace = (placeId) => {
     return {
         type: 'SET_CURRENT_PLACE',
-        place
+        placeId
     }
 }
 
-const getWorkspaces = (filterParams) => {
+
+const fetchWorkspaceData = (filterParams) => {
     return (dispatch) => {
+        let placesArray = []
         let workspacesRef = firebaseApp.ref('/workspaces/');
         workspacesRef.once('value').then(snapshot => {
-            const data = snapshot.val();
-            const workspaces = Object.keys(data).map(key => data[key]);
-            console.log(workspaces);
-            dispatch(getWorkspacesSuccess(workspaces));
+        const data = snapshot.val();
+        const workspaces = Object.keys(data).map(key => data[key]);
+            dispatch(fetchMapData(workspaces));
         });
     }
 }
 
-const getWorkspacesSuccess = (workspaces) => {
+const fetchMapData = (workspaces) => {
+    return (dispatch, getState) => {
+        let service = getState().placesService;
+        let mergedWorkspaces = [];
+
+        for (var i = 0; i <= workspaces.length; i +=1) {
+            var request = {
+                placeId: workspaces[i].placeId,
+                workspace: workspaces[i]
+            }
+            service.getDetails(request, (place, status) => {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    let workspaceWithGData =
+                        Object.assign({}, request.workspace, {googleData: place});
+                    mergedWorkspaces.push(workspaceWithGData);
+                }
+                dispatch(updateWorkspaceCache(mergedWorkspaces));
+            });
+        }
+    }
+}
+
+const updateWorkspaceCache = (workspaces) => {
     return {
-        type: 'GET_WORKSPACES_SUCCESS',
+        type: 'UPDATE_WORKSPACE_CACHE',
         workspaces
     }
 }
@@ -51,8 +67,6 @@ const addWorkspaceSuccess = (workspace) => {
 };
 
 
-
-
 const removeWorkspace = (workspaceId, workspaceIndex) => {
     // assumes index of array of current workspaces can be captured at dispatch time.
     return function(dispatch) {
@@ -60,7 +74,6 @@ const removeWorkspace = (workspaceId, workspaceIndex) => {
         workspaceRef.remove().then(() => {
             dispatch(removeWorkspaceSuccess(workspaceIndex));
         })
-
     }
 };
 
@@ -71,13 +84,10 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
-// exports.saveMapPlace = saveMapPlace;
-exports.saveMapPlaceSuccess = saveMapPlaceSuccess;
-
 exports.setCurrentPlace = setCurrentPlace;
-
-exports.getWorkspaces = getWorkspaces;
-exports.getWorkspacesSuccess = getWorkspacesSuccess;
+exports.fetchWorkspaceData = fetchWorkspaceData;
+exports.fetchMapData = fetchMapData;
+exports.updateWorkspaceCache = updateWorkspaceCache;
 
 exports.addWorkspace = addWorkspace;
 exports.addWorkspaceSuccess = addWorkspaceSuccess;
