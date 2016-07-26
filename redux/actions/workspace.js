@@ -31,39 +31,8 @@ const fetchWorkspaceData = (filterParams) => {
 const fetchMapData = (workspaces) => {
     return (dispatch, getState) => {
         let service = getState().placesService;
-
         let mergedWorkspaces = [];
-        let workspaces = [{
-            "placeId":"ChIJ7zbMpZpZwoARjbdOvuQKcn8",
-            "googleData": null,
-            "description": "short description",
-            "hasWifi": true,
-            "hasCaffeine": true,
-            "hasFood": true,
-            "hasOutlets": true,
-            "hasTableSpace": true,
-            "hasOutdoorSpace": true,
-            "isQuiet": true,
-            "isAccessible": true,
-            "quirks": "quirky",
-            "perks": "perky",
-            "directions": "directy"
-        },{
-            "placeId":"ChIJp6fWcohcwoARrIWK0sUe-VE",
-            "googleData": null,
-            "description": "short description",
-            "hasWifi": false,
-            "hasCaffeine": false,
-            "hasFood": false,
-            "hasOutlets": true,
-            "hasTableSpace": true,
-            "hasOutdoorSpace": false,
-            "isQuiet": false,
-            "isAccessible": false,
-            "quirks": "quirky",
-            "perks": "perky",
-            "directions": "directy"
-        }]
+
         for (var i = 0; i <= workspaces.length; i +=1) {
             var request = {
                 placeId: workspaces[i].placeId
@@ -71,10 +40,9 @@ const fetchMapData = (workspaces) => {
             service.getDetails(request, (place, status) => {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     let workspaceWithGData =
-                    Object.assign({}, workspaces[i], {googleData: place});
+                        Object.assign({}, workspaces[i], {googleData: place});
                     mergedWorkspaces.push(workspaceWithGData);
                 }
-
                 dispatch(updateWorkspaceCache(mergedWorkspaces));
             });
         }
@@ -123,13 +91,8 @@ const removeWorkspaceSuccess = (index) => {
 };
 
 exports.setCurrentPlace = setCurrentPlace;
-
 exports.fetchWorkspaceData = fetchWorkspaceData;
-// exports.fetchWorkspaceDataSuccess = fetchWorkspaceDataSuccess;
-
 exports.fetchMapData = fetchMapData;
-// exports.fetchMapDatasSuccess = fetchMapDataSuccess;
-
 exports.updateWorkspaceCache = updateWorkspaceCache;
 
 exports.addWorkspace = addWorkspace;
