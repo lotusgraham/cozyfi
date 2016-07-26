@@ -21,13 +21,6 @@ const fetchWorkspaceData = (filterParams) => {
     }
 }
 
-// const fetchWorkspaceDataSuccess = (workspaces) => {
-//     return {
-//         type: 'FETCH_WORKSPACE_DATA_SUCCESS',
-//         workspaces
-//     }
-// }
-
 const fetchMapData = (workspaces) => {
     return (dispatch, getState) => {
         let service = getState().placesService;
@@ -35,12 +28,13 @@ const fetchMapData = (workspaces) => {
 
         for (var i = 0; i <= workspaces.length; i +=1) {
             var request = {
-                placeId: workspaces[i].placeId
+                placeId: workspaces[i].placeId,
+                workspace: workspaces[i]
             }
             service.getDetails(request, (place, status) => {
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     let workspaceWithGData =
-                        Object.assign({}, workspaces[i], {googleData: place});
+                        Object.assign({}, request.workspace, {googleData: place});
                     mergedWorkspaces.push(workspaceWithGData);
                 }
                 dispatch(updateWorkspaceCache(mergedWorkspaces));
