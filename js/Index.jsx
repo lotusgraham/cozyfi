@@ -25,6 +25,8 @@ import store from '../redux/store';
 import Form from './Form';
 import SinglePage from './SinglePage';
 import * as actions from '../redux/actions/workspace.js';
+import AddButton from './AddButton';
+
 // import {Container as Cardz} from './Cardz.jsx';
 
 const NavBar = () => (
