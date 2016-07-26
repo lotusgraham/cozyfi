@@ -4,8 +4,9 @@ const initialState = {
 	workspaceCache: [],
     placeId: null,
     placeData: null,
-	workspaceSaved: false
-};
+	workspaceSaved: false,
+    placesService: new google.maps.places.PlacesService(document.createElement('div'))
+}
 
 const workspaceReducer = (state, action) => {
 	state = state || initialState;
@@ -13,6 +14,7 @@ const workspaceReducer = (state, action) => {
         let newState = update(state, {
             workspaceCache: {$push: action.workspaces}
         });
+        console.log('-+_+_+_+_+_+_+__+_');
         state = newState;
     }
     if (action.type === 'ADD_WORKSPACE_SUCCESS') {
