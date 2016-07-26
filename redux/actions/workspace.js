@@ -29,8 +29,9 @@ const fetchWorkspaceData = (filterParams) => {
 // }
 
 const fetchMapData = (workspaces) => {
-    return (dispatch) => {
-        // nest this in a loop; perform this work on array
+    return (dispatch, getState) => {
+        let service = getState().placesService;
+
         let mergedWorkspaces = [];
         let workspaces = [{
             "placeId":"ChIJ7zbMpZpZwoARjbdOvuQKcn8",
@@ -64,22 +65,17 @@ const fetchMapData = (workspaces) => {
             "directions": "directy"
         }]
         for (var i = 0; i <= workspaces.length; i +=1) {
-            let gMapsBaseUrl = 'https://maps.googleapis.com/maps/api/place/details/json',
-            query = {
-                placeid:  workspaces[i].placeId,
-                key: 'AIzaSyAxTnTQ3fTqVc3bE5MhFw7qXYq0o1NUJpo'
-            },
-            params = Object.keys(query)
-            .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(query[key]))
-            .join("&")
-            .replace(/%20/g, "+");
-            fetch(gMapsBaseUrl + '?' + params, {headers: new Headers(), mode: 'cors'})
-            .then(res => res.json())
-            .then(res => {
-                let workspaceWithGData =
-                Object.assign({}, workspaces[i], {googleData: res.result});
-                 mergedWorkspaces.push(workspaceWithGData);
-                 return console.log(mergedWorkspaces)
+            var request = {
+                placeId: workspaces[i].placeId
+            }
+            service.getDetails(request, (place, status) => {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    let workspaceWithGData =
+                    Object.assign({}, workspaces[i], {googleData: place});
+                    mergedWorkspaces.push(workspaceWithGData);
+                }
+
+                dispatch(updateWorkspaceCache(mergedWorkspaces));
             });
         }
     }
