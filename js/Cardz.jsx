@@ -6,10 +6,11 @@ import store from '../redux/store.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import update from 'react-addons-update';
 
-const styles = {cardz: {
-    maxHeight: 500
-}
-}
+const styles = {
+    cardz: {
+        maxHeight: 500
+    }
+};
 
 
 class Cardz extends React.Component {
@@ -55,7 +56,7 @@ updateCard() {
           onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
           <CardHeader
             title={tile.placeData}
-            subtitle="{tile.desc}"
+            subtitle={tile.description}
             avatar="{tile.avatar}"
             actAsExpander={true}
             showExpandableButton={true}
@@ -71,7 +72,12 @@ updateCard() {
           </CardMedia>
           <CardTitle title={tile.placeData} subtitle="Card subtitle" expandable={true} />
           <CardText expandable={true}>
-            {tile.description}
+              <ul>
+                  <li>{tile.description}</li>
+                  <li>{tile.directions}</li>
+                  <li>{tile.perks}</li>
+                  <li>{tile.quirks}</li>
+              </ul>
           </CardText>
           <CardActions>
           </CardActions>
