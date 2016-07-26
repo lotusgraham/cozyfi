@@ -3,6 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../redux/actions/workspace.js';
 import store from '../redux/store.js';
+import update from 'react-addons-update';
 
 import Formsy from 'formsy-react';
 import Paper from 'material-ui/Paper';
@@ -66,6 +67,7 @@ const Form = React.createClass({
   getInitialState() {
     return {
       canSubmit: false,
+      quirks:'ssss',
     };
   },
 
@@ -100,12 +102,34 @@ const Form = React.createClass({
       canSubmit: false,
     });
   },
-
+  resetForm() {
+    let formData = {
+      quirks:""
+    }
+    this.refs.quirks.setValue("");
+    this.refs.form.reset(formData);
+    console.log("RESET FORM DANGIT");
+    console.log(this.refs.form);
+  },
   submitForm(formData) {
       let completeWorkspace = Object.assign({}, formData, {placeData: this.props.state.placeData.name});
       console.log(completeWorkspace);
       this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },
+  handleChange(event){
+       this.setState({
+         quirks: event.target.value,
+       });
+       console.log(event.target.value);
+     },
+  handleClick(){
+       let newState = update(this.state, {quirks: {$set:'xxxx'}})
+       console.log("RESET DAT SHEEEIIT");
+       console.log(newState);
+       this.setState(newState);
+      //  let x = update(newState, {quirks: e.target.value {$set: 'xxx'}
+
+     },
 
   notifyFormError(data) {
     console.error('Form error:', data);
@@ -123,6 +147,7 @@ const Form = React.createClass({
             onInvalid={this.disableButton}
             onValidSubmit={this.submitForm}
             onInvalidSubmit={this.notifyFormError}
+            ref="form"
           >
           <FormsyText
             name="description"
@@ -139,6 +164,9 @@ const Form = React.createClass({
             multiLine={true}
             fullWidth={true}
             rows={2}
+            onChange={this.handleChange}
+            value={this.state.quirks}
+
           />
           <FormsyText
             name="perks"
@@ -151,7 +179,7 @@ const Form = React.createClass({
           />
           <FormsyText
             name="directions"
-            hintText="      Any specific directions needed to find this place?"
+            hintText="Any specific directions needed to find this place?"
             floatingLabelText="Directions"
             multiLine={true}
             rows={2}
@@ -213,6 +241,16 @@ const Form = React.createClass({
               label="Submit"
               disabled={false}
             />
+            <RaisedButton
+              style={submitStyle}
+              type="reset"
+              label="Reset"
+              disabled={false}
+              onClick={this.handleClick}
+            />
+
+
+
           </Formsy.Form>
         </Paper>
     );
