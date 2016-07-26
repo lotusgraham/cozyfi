@@ -33,12 +33,6 @@ const workspaceReducer = (state, action) => {
     });
 		state = newState;
     }
-    if (action.type === 'SAVE_MAP_PLACE_SUCCESS') {
-        let newState = update(state, {
-            placeData: {$set: action.place}
-        });
-        state = newState;
-    }
     return state;
 };
 
