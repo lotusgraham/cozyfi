@@ -67,7 +67,6 @@ const Form = React.createClass({
   getInitialState() {
     return {
       canSubmit: false,
-      quirks:'ssss',
     };
   },
 
@@ -116,19 +115,8 @@ const Form = React.createClass({
       console.log(completeWorkspace);
       this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },
-  handleChange(event){
-       this.setState({
-         quirks: event.target.value,
-       });
-       console.log(event.target.value);
-     },
-  handleClick(){
-       let newState = update(this.state, {quirks: {$set:'xxxx'}})
-       console.log("RESET DAT SHEEEIIT");
-       console.log(newState);
-       this.setState(newState);
-      //  let x = update(newState, {quirks: e.target.value {$set: 'xxx'}
-
+  resetForm(){
+      this.refs.form.reset();
      },
 
   notifyFormError(data) {
@@ -246,7 +234,7 @@ const Form = React.createClass({
               type="reset"
               label="Reset"
               disabled={false}
-              onClick={this.handleClick}
+              onTouchTap={this.resetForm}
             />
 
 
