@@ -208,14 +208,12 @@ const Form = React.createClass({
                   label="Accessible"
                   style={switchStyle}
                 />
-              <Link to="/">
                 <RaisedButton
                   style={submitStyle}
                   type="submit"
                   label="Submit"
                   disabled={false}
                 />
-             </Link>
           </Formsy.Form>
         </Paper>
     );
