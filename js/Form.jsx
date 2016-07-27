@@ -1,4 +1,5 @@
 import React from 'react';
+import { Router, Route, Link } from 'react-router'
 
 import {connect} from 'react-redux';
 import * as actions from '../redux/actions/workspace.js';
@@ -207,13 +208,14 @@ const Form = React.createClass({
                   label="Accessible"
                   style={switchStyle}
                 />
-
-            <RaisedButton
-              style={submitStyle}
-              type="submit"
-              label="Submit"
-              disabled={false}
-            />
+              <Link to="/">
+                <RaisedButton
+                  style={submitStyle}
+                  type="submit"
+                  label="Submit"
+                  disabled={false}
+                />
+             </Link>
           </Formsy.Form>
         </Paper>
     );
