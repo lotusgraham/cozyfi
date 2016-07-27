@@ -58,6 +58,11 @@ export default class FormMap extends React.Component {
 
     const places = this.refs.searchBox.getPlaces();
     const placeId = places[0].place_id;
+    const place = {
+        placeId: places[0].place_id,
+            lat: places[0].geometry.location.lat(),
+            lng: places[0].geometry.location.lng()
+        };
     const markers = [];
 
     // Add a marker for each place returned from search bar
