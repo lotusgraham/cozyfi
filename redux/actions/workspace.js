@@ -1,10 +1,12 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
-const setCurrentPlace = (placeId) => {
+const setCurrentPlace = (place) => {
     return {
         type: 'SET_CURRENT_PLACE',
-        placeId
+        placeId: place.placeId,
+        lat: place.lat,
+        lng: place.lng
     }
 }
 

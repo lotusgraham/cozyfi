@@ -3,6 +3,8 @@ var update = require('react-addons-update');
 const initialState = {
 	workspaceCache: [],
     placeId: null,
+    lat: null,
+    lng: null,
     googleData: null,
 	workspaceSaved: false,
     placesService: new google.maps.places.PlacesService(document.createElement('div'))
@@ -29,7 +31,9 @@ const workspaceReducer = (state, action) => {
     }
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
-		currentPlace: {$set: action.placeId}
+		currentPlace: {$set: action.placeId},
+        currentLat: {$set: action.lat},
+        currentLng: {$set: action.lng}
     });
 		state = newState;
     }
