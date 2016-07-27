@@ -140,7 +140,9 @@ export default class FormMap extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-    return {state: state}
+    return {
+        state: state
+    }
 }
 
 const Container = connect(mapStateToProps)(FormMap);

@@ -104,7 +104,7 @@ const Form = React.createClass({
 
   submitForm(formData) {
       console.log(this.props.state);
-      let completeWorkspace = Object.assign({}, formData, {placeId: this.props.state.currentPlace});
+      let completeWorkspace = Object.assign({}, formData, {placeId: this.props.currentPlace});
       console.log(completeWorkspace);
       this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },
@@ -222,7 +222,7 @@ const Form = React.createClass({
 
 const mapStateToProps = (state, props) => {
     return {
-        state: state
+        currentPlace: state.currentPlace
     }
 };
 

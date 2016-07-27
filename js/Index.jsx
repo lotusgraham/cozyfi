@@ -103,12 +103,6 @@ const App = (props) => (
     </div>
 );
 
-const mapStateToProps = (state, props) => {
-    return {state: state}
-}
-
-const Container = connect(mapStateToProps)(App);
-
 const routes = (
   <Provider store={store}>
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>

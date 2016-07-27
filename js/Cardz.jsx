@@ -47,7 +47,7 @@ updateCard() {
 };
 
   render() {
-    var tiles = this.props.state.workspaceCache.map((tile, index) => {
+    var tiles = this.props.workspaceCache.map((tile, index) => {
       console.log('strung: ', tile);
       return(
       <Card
@@ -93,7 +93,7 @@ updateCard() {
 
 const mapStateToProps = (state, props) => {
     return {
-        state: state
+        workspaceCache: state.workspaceCache
     }
 };
 
