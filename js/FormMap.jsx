@@ -65,7 +65,7 @@ let mapCenter = {
     lng: -78.9058,
 }
 
-// console.log(userCenter);
+// console.log(userLat);
 
 export default class FormMap extends React.Component {
   constructor() {
@@ -73,6 +73,8 @@ export default class FormMap extends React.Component {
       //BINDS THIS TO EACH FUNCTION
       this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
+      this.componentWillMount = this.componentWillMount.bind(this);
+    //   this.getLocSuccess = this.getLocSuccess.bind(this);
     //   this.initMap = this.initMap.bind(this);
 
     //   setUserLocation();
@@ -124,12 +126,12 @@ export default class FormMap extends React.Component {
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
-componentWillMount() {
-    // console.log(setUserLocation());
-    const getLocSuccess = function (position) {
-        console.log(position.coords.latitude, position.coords.longitude);
-    }
-    navigator.geolocation.getCurrentPosition(getLocSuccess);
+  componentWillMount() {
+      const getLocSuccess = function (position) {
+          var userLat = position.coords.latitude;
+          var userLng = position.coords.longitude;
+      }
+      navigator.geolocation.getCurrentPosition(getLocSuccess);
 }
 
 
