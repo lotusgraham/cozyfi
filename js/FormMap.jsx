@@ -29,19 +29,6 @@ let ralDur = {
     lng: -78.9058,
 }
 
-// README: Comment this back in to test getUserLoc without
-// the abstraction of the actions & reducer. How to make userLoc
-// available to the rest of the code without wrapping the entire thing
-// in this success callback?
-//
-const getUserLocSuccess = function (position) {
-     let userLoc = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-    }
-}
-navigator.geolocation.getCurrentPosition(getUserLocSuccess)
-
 export default class FormMap extends React.Component {
   constructor() {
       super();
@@ -53,13 +40,7 @@ export default class FormMap extends React.Component {
   }
 
 
-  handleBoundsChanged() {
-      this.state = {
-        center: mapCenter,
-        markers
-      };
-    console.log('dos', mapCenter);
-  }
+  handleBoundsChanged() {}
 
 
   handlePlacesChanged() {
@@ -90,24 +71,6 @@ export default class FormMap extends React.Component {
   }
   componentWillMount() {
       this.props.dispatch(actions.getUserLoc());
-
-      // README: This puts a userLoc object in this.props.state.
-      // You can change the map center by seting the <GoogleMap>
-      // 'center' attr. to this.props.state.userLoc, but then the map
-      // no longer changes boundaries or drops a new pin. Attempting to
-      // set this.state.center within this function does not work.
-
-      // We need to find a way to capture the user's geoloc BEFORE
-      // the component lifeCycle starts but I cannot think of how to
-      // do that AND expose that geoloc to React.
-      //
-    //   const getUserLocSuccess = function (position) {
-    //        let userLoc = {
-    //           lat: position.coords.latitude,
-    //           lng: position.coords.longitude
-    //       }
-    //   }
-    //   navigator.geolocation.getCurrentPosition(getUserLocSuccess)
 
       this.state = {
           bounds: null,
@@ -141,10 +104,8 @@ export default class FormMap extends React.Component {
         />
         {this.state.markers.map((marker, index) => (
           <Marker position={marker.position}
-                  place='ChIJLcOqFtbarIkRnyH30OdQzUg'
                   key={index} />
         ))}
-        <Marker place='ChIJLcOqFtbarIkRnyH30OdQzUg'></Marker>
       </GoogleMap>
     );
   }
