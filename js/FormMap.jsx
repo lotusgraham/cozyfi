@@ -80,6 +80,7 @@ export default class FormMap extends React.Component {
     //   setUserLocation();
       console.log('uno',mapCenter);
     let userCenter = mapCenter;
+
   }
 
 
@@ -121,6 +122,11 @@ export default class FormMap extends React.Component {
   }
   componentWillMount() {
       this.props.dispatch(actions.getUserLoc());
+      this.state = {
+          bounds: null,
+          center: mapCenter,
+          markers: []
+      }
   }
 
 
