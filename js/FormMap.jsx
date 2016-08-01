@@ -43,20 +43,20 @@ const fail = () => {
     alert("Please refresh the page and accept the prompt to allow us to use your current location with the application.");
 }
 
-const setUserLocation = () => {
-    if (navigator && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                success(position.coords.latitude, position.coords.longitude);
-                console.log(position.coords.latitude, position.coords.longitude);
-                console.log('==============');
-                var userCenter = 5;
-            }
-        )
-        console.log('derp', userCenter);
-    }
-    return userCenter;
-}
+// const setUserLocation = () => {
+//     if (navigator && navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(
+//             (position) => {
+//                 success(position.coords.latitude, position.coords.longitude);
+//                 console.log(position.coords.latitude, position.coords.longitude);
+//                 console.log('==============');
+//                 var userCenter = 5;
+//             }
+//         )
+//         console.log('derp', userCenter);
+//     }
+//     return userCenter;
+// }
 
 
 
@@ -125,7 +125,7 @@ export default class FormMap extends React.Component {
 
   }
 componentWillMount() {
-          console.log(setUserLocation());
+        //   console.log(setUserLocation());
           console.log(navigator.geolocation.getCurrentPosition(function(position) {
               console.log(position.coords.latitude, position.coords.longitude);
               console.log('==============');
