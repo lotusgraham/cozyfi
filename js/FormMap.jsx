@@ -127,13 +127,24 @@ export default class FormMap extends React.Component {
 
   }
   componentWillMount() {
-      const getLocSuccess = function (position) {
-          var userLat = position.coords.latitude;
-          var userLng = position.coords.longitude;
-      }
-      navigator.geolocation.getCurrentPosition(getLocSuccess);
-}
+      var userCenter;
+      const getLocSuccess = function (userCenter, position) {
+          userCenter = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+          }
+          this.state = {
+              center: userCenter
+          }
+          console.log('center inside: ', userCenter);
+          return userCenter;
 
+      }
+
+      console.log('center before: ', userCenter);
+      navigator.geolocation.getCurrentPosition(getLocSuccess.bind(this, userCenter));
+      console.log('center after: ', userCenter);
+}
 
 
 
