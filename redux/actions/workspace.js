@@ -95,7 +95,7 @@ const removeWorkspaceSuccess = (index) => {
 };
 
 const getUserLoc = function() {
-    return function(dispatch) {
+    return function(dispatch, getState) {
         const getUserLocSuccess = function (dispatch, position) {
             let userLoc = {
                 lat: position.coords.latitude,
