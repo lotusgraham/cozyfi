@@ -24,48 +24,23 @@ const searchStyles = {
     width: '350px',
 }
 
-// let center = (lat, lng) => {
-//     this.lat = lat;
-//     this.lng = lng;
-// }
-
-
-const success = (lat, lng) => {
-    mapCenter.lat= lat;
-    mapCenter.lng = lng;
-    // return update(mapCenter, {
-    //     lat: {$set: lat},
-    //     lng: {$set: lng}
-    // })
-}
-
-const fail = () => {
-    alert("Please refresh the page and accept the prompt to allow us to use your current location with the application.");
-}
-
-// const setUserLocation = () => {
-//     if (navigator && navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition(
-//             (position) => {
-//                 success(position.coords.latitude, position.coords.longitude);
-//                 console.log(position.coords.latitude, position.coords.longitude);
-//                 console.log('==============');
-//                 var userCenter = 5;
-//             }
-//         )
-//         console.log('derp', userCenter);
-//     }
-//     return userCenter;
-// }
-
-
-
-let mapCenter = {
+let ralDur = {
     lat: 36.002453,
     lng: -78.9058,
 }
 
-// console.log(userLat);
+// README: Comment this back in to test getUserLoc without
+// the abstraction of the actions & reducer. How to make userLoc
+// available to the rest of the code without wrapping the entire thing
+// in this success callback?
+//
+// const getUserLocSuccess = function (position) {
+//      userLoc = {
+//         lat: position.coords.latitude,
+//         lng: position.coords.longitude
+//     }
+// }
+// navigator.geolocation.getCurrentPosition(getUserLocSuccess)
 
 export default class FormMap extends React.Component {
   constructor() {
@@ -74,15 +49,8 @@ export default class FormMap extends React.Component {
       this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
       this.componentWillMount = this.componentWillMount.bind(this);
-    //   this.getLocSuccess = this.getLocSuccess.bind(this);
-    //   this.initMap = this.initMap.bind(this);
-
-    //   setUserLocation();
-      console.log('uno',mapCenter);
-    let userCenter = mapCenter;
 
   }
-
 
 
   handleBoundsChanged() {
@@ -117,16 +85,28 @@ export default class FormMap extends React.Component {
       center: mapCenter,
       markers
     };
+    console.log(this.state);
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
   componentWillMount() {
       this.props.dispatch(actions.getUserLoc());
+      // README: This puts a userLoc object in this.props.state.
+      // You can change the map center by seting the <GoogleMap>
+      // 'center' attr.to this.props.state.userLoc, but then the map
+      // no longer changes boundaries or drops a new pin. Attempting to
+      // set this.state.center within this function does not work.
+
+      // We need to find a way to capture the user's geoloc BEFORE
+      // the component lifeCycle starts but I cannot think of how to
+      // do that AND expose that geoloc to React.
+
       this.state = {
           bounds: null,
-          center: mapCenter,
+          center: ralDur, //Set initial state to hard-coded Raleigh coordinates
           markers: []
       }
+      console.log(this.props.state)
   }
 
 
