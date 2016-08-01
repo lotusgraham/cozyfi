@@ -85,7 +85,6 @@ export default class FormMap extends React.Component {
       center: mapCenter,
       markers
     };
-    console.log(this.state);
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
@@ -143,7 +142,6 @@ export default class FormMap extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
-    console.log(state);
     return {
         state: state
     }
