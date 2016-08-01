@@ -125,12 +125,11 @@ export default class FormMap extends React.Component {
 
   }
 componentWillMount() {
-        //   console.log(setUserLocation());
-          console.log(navigator.geolocation.getCurrentPosition(function(position) {
-              console.log(position.coords.latitude, position.coords.longitude);
-              console.log('==============');
-              return 5;
-          }));
+    // console.log(setUserLocation());
+    const getLocSuccess = function (position) {
+        console.log(position.coords.latitude, position.coords.longitude);
+    }
+    navigator.geolocation.getCurrentPosition(getLocSuccess);
 }
 
 
