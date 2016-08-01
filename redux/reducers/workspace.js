@@ -34,7 +34,8 @@ const workspaceReducer = (state, action) => {
 		let newState = update(state, {
 		currentPlace: {$set: action.placeId},
         currentLat: {$set: action.lat},
-        currentLng: {$set: action.lng}
+        currentLng: {$set: action.lng},
+        userLoc: {$set: {lat: action.lat, lng: action.lng}}
     });
 		state = newState;
     }

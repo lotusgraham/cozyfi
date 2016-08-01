@@ -34,13 +34,13 @@ let ralDur = {
 // available to the rest of the code without wrapping the entire thing
 // in this success callback?
 //
-// const getUserLocSuccess = function (position) {
-//      userLoc = {
-//         lat: position.coords.latitude,
-//         lng: position.coords.longitude
-//     }
-// }
-// navigator.geolocation.getCurrentPosition(getUserLocSuccess)
+const getUserLocSuccess = function (position) {
+     let userLoc = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+    }
+}
+navigator.geolocation.getCurrentPosition(getUserLocSuccess)
 
 export default class FormMap extends React.Component {
   constructor() {
@@ -90,6 +90,7 @@ export default class FormMap extends React.Component {
   }
   componentWillMount() {
       this.props.dispatch(actions.getUserLoc());
+
       // README: This puts a userLoc object in this.props.state.
       // You can change the map center by seting the <GoogleMap>
       // 'center' attr. to this.props.state.userLoc, but then the map
@@ -99,6 +100,14 @@ export default class FormMap extends React.Component {
       // We need to find a way to capture the user's geoloc BEFORE
       // the component lifeCycle starts but I cannot think of how to
       // do that AND expose that geoloc to React.
+      //
+    //   const getUserLocSuccess = function (position) {
+    //        let userLoc = {
+    //           lat: position.coords.latitude,
+    //           lng: position.coords.longitude
+    //       }
+    //   }
+    //   navigator.geolocation.getCurrentPosition(getUserLocSuccess)
 
       this.state = {
           bounds: null,
@@ -111,7 +120,7 @@ export default class FormMap extends React.Component {
   render() {
     return (
       <GoogleMap
-        center={this.state.center}
+        center={this.props.state.userLoc}
         containerProps={{
           style: {
             height: '400px',
