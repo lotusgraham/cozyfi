@@ -29,10 +29,6 @@ const searchStyles = {
 //     this.lng = lng;
 // }
 
-let mapCenter = {
-    lat: 36.002453,
-    lng: -78.905869,
-}
 
 const success = (lat, lng) => {
     mapCenter.lat= lat;
@@ -49,15 +45,24 @@ const fail = () => {
 
 const setUserLocation = () => {
     if (navigator && navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            success(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords.latitude,position.coords.longitude);
-        }, () => {
-            fail();
-        });
-    } else {
-        fail();
-    };
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                success(position.coords.latitude, position.coords.longitude);
+                console.log(position.coords.latitude, position.coords.longitude);
+                console.log('==============');
+                var userCenter = 5;
+            }
+        )
+        console.log('derp', userCenter);
+    }
+    return userCenter;
+}
+
+
+
+let mapCenter = {
+    lat: 36.002453,
+    lng: -78.9058,
 }
 
 // console.log(userCenter);
@@ -70,16 +75,19 @@ export default class FormMap extends React.Component {
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
     //   this.initMap = this.initMap.bind(this);
 
-      setUserLocation();
+    //   setUserLocation();
       console.log('uno',mapCenter);
     let userCenter = mapCenter;
 
       this.state = {
           bounds: null,
-          center: userCenter,
+          center: mapCenter,
           markers: []
       }
+      console.log(this.state);
   }
+
+
 
   handleBoundsChanged() {
     this.setState({
@@ -116,6 +124,17 @@ export default class FormMap extends React.Component {
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
+componentWillMount() {
+          console.log(setUserLocation());
+          console.log(navigator.geolocation.getCurrentPosition(function(position) {
+              console.log(position.coords.latitude, position.coords.longitude);
+              console.log('==============');
+              return 5;
+          }));
+}
+
+
+
 
   render() {
     return (
