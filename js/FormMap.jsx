@@ -90,10 +90,10 @@ export default class FormMap extends React.Component {
 
 
   handleBoundsChanged() {
-    this.setState({
-      bounds: this.refs.map.getBounds(),
-      center: this.refs.map.getCenter(),
-    });
+      this.state = {
+        center: mapCenter,
+        markers
+      };
     console.log('dos', mapCenter);
   }
 
@@ -117,10 +117,10 @@ export default class FormMap extends React.Component {
 
     // Set markers; set map center to first search result
     const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
-    this.setState({
+    this.state = {
       center: mapCenter,
       markers
-    });
+    };
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
