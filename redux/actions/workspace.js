@@ -1,4 +1,5 @@
 var firebaseApp = require('../../js/Firebase.jsx');
+var GeoFire = require('geofire');
 require('isomorphic-fetch');
 
 const setCurrentPlace = (place) => {
@@ -13,8 +14,9 @@ const setCurrentPlace = (place) => {
 
 const fetchWorkspaceData = (filterParams) => {
     return (dispatch) => {
-        let placesArray = []
+        let placesArray = [];
         let workspacesRef = firebaseApp.ref('/workspaces/');
+
         workspacesRef.once('value').then(snapshot => {
         const data = snapshot.val();
         const workspaces = Object.keys(data).map(key => data[key]);
@@ -61,10 +63,15 @@ const addWorkspace = (workspace) => {
         dispatch(addWorkspaceSuccess(workspace));
         workspacesRef.push(workspace);
 
-        // let geoFire = new GeoFire(workspacesRef);
-        // geoFire.push(workspace);
-        console.log("AAGASAASSAGAGA", workspace.lng);
-        console.log("agajghajgagka", workspace.lat);
+        workspacesRef.on('child_added', data => {
+            // Handle geofire logic when new worspace added
+            let geoFire = new GeoFire(firebaseApp.ref('/workspaces/' + data.key));
+            console.log('the data val coords: ', [data.val().lat, data.val().lng]);
+            // 'loc' prop is added to firebase data node
+            geoFire.set('loc', [data.val().lat, data.val().lng]);
+            // TODO: make sure data is retrievable as-is?
+
+        });
     }
 };
 
