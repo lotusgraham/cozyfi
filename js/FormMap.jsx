@@ -68,14 +68,15 @@ export default class FormMap extends React.Component {
       //BINDS THIS TO EACH FUNCTION
       this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
-      this.initMap = this.initMap.bind(this);
+    //   this.initMap = this.initMap.bind(this);
 
       setUserLocation();
       console.log('uno',mapCenter);
+    let userCenter = mapCenter;
 
       this.state = {
           bounds: null,
-          center: mapCenter,
+          center: userCenter,
           markers: []
       }
   }
@@ -87,7 +88,6 @@ export default class FormMap extends React.Component {
     });
     console.log('dos', mapCenter);
   }
-
 
 
   handlePlacesChanged() {
@@ -117,34 +117,6 @@ export default class FormMap extends React.Component {
 
   }
 
-  initMap() {
-    //  var map = new google.maps.Map( {
-    //    center: this.state.center,
-    //    zoom: 15
-    //  });
-
-     var infowindow = new google.maps.InfoWindow();
-     var service = new google.maps.places.PlacesService(mapCenter);
-
-     service.getDetails({
-         //need to find out how to get grab placeId from marker
-       placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-     }, function(place, status) {
-       if (status === google.maps.places.PlacesServiceStatus.OK) {
-           console.log('elias', mapCenter);
-         var marker = new google.maps.Marker({
-           map: mapCenter,
-           position: place.geometry.location
-         });
-         google.maps.event.addListener(marker, 'click', function() {
-           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-             'Place ID: ' + place.place_id + '<br>' +
-             place.formatted_address + '</div>');
-           infowindow.open(mapCenter, this);
-         });
-       }
-     });
-   }
   render() {
     return (
       <GoogleMap
