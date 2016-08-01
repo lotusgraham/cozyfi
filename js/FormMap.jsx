@@ -6,6 +6,8 @@ import store from '../redux/store.js';
 
 import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
+import update from 'react-addons-update';
+
 const searchStyles = {
     border: '1px solid transparent',
     borderRadius: '1px',
@@ -22,10 +24,43 @@ const searchStyles = {
     width: '350px',
 }
 
-const mapCenter = {
+// let center = (lat, lng) => {
+//     this.lat = lat;
+//     this.lng = lng;
+// }
+
+let mapCenter = {
     lat: 36.002453,
     lng: -78.905869,
 }
+
+const success = (lat, lng) => {
+    mapCenter.lat= lat;
+    mapCenter.lng = lng;
+    // return update(mapCenter, {
+    //     lat: {$set: lat},
+    //     lng: {$set: lng}
+    // })
+}
+
+const fail = () => {
+    alert("Please refresh the page and accept the prompt to allow us to use your current location with the application.");
+}
+
+const setUserLocation = () => {
+    if (navigator && navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            success(position.coords.latitude, position.coords.longitude);
+            console.log(position.coords.latitude,position.coords.longitude);
+        }, () => {
+            fail();
+        });
+    } else {
+        fail();
+    };
+}
+
+// console.log(userCenter);
 
 export default class FormMap extends React.Component {
   constructor() {
@@ -35,6 +70,9 @@ export default class FormMap extends React.Component {
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
       this.initMap = this.initMap.bind(this);
 
+      setUserLocation();
+      console.log('uno',mapCenter);
+
       this.state = {
           bounds: null,
           center: mapCenter,
@@ -42,17 +80,15 @@ export default class FormMap extends React.Component {
       }
   }
 
-  // let mapCenter = {
-  //     lat: 36.002453,
-  //     lng: -78.905869,
-  // }
-
   handleBoundsChanged() {
     this.setState({
       bounds: this.refs.map.getBounds(),
       center: this.refs.map.getCenter(),
     });
+    console.log('dos', mapCenter);
   }
+
+
 
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
@@ -73,7 +109,6 @@ export default class FormMap extends React.Component {
 
     // Set markers; set map center to first search result
     const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
-
     this.setState({
       center: mapCenter,
       markers
@@ -96,6 +131,7 @@ export default class FormMap extends React.Component {
        placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
      }, function(place, status) {
        if (status === google.maps.places.PlacesServiceStatus.OK) {
+           console.log('elias', mapCenter);
          var marker = new google.maps.Marker({
            map: mapCenter,
            position: place.geometry.location

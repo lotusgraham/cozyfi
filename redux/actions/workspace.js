@@ -61,8 +61,13 @@ const addWorkspace = (workspace) => {
         dispatch(addWorkspaceSuccess(workspace));
         workspacesRef.push(workspace);
 
+        // let geoFire = new GeoFire(workspacesRef);
+        // geoFire.push(workspace);
+        console.log("AAGASAASSAGAGA", workspace.lng);
+        console.log("agajghajgagka", workspace.lat);
     }
 };
+
 
 const addWorkspaceSuccess = (workspace) => {
     return {
@@ -89,6 +94,40 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
+
+//////////ACTION OF SETTING THE USER LOCATION ON THE FORM MAP
+
+
+// const setUserLocation = (success, fail) => {
+//     if (navigator && navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition((pos) => {
+//             success(pos.coords.latitude, pos.coords.longitude);
+//         }, () => {
+//             fail();
+//         });
+//     } else {
+//         fail();
+//     };
+//     const success = (lat, lng) => {
+//         alert(lat + " , " + lng);
+//     }
+//     const fail = () => {
+//         alert("Please refresh the page and accept the prompt to allow us to use your current location with the application.");
+//     }
+// }
+
+
+//////////ACTION
+
+
+// const setUserLocationSuccess = (coords) => {
+//     return {
+//         type: 'GET_USER_LOCATION_SUCCESS',
+//         coords
+//     }
+// }
+
+
 exports.setCurrentPlace = setCurrentPlace;
 exports.fetchWorkspaceData = fetchWorkspaceData;
 exports.fetchMapData = fetchMapData;
@@ -99,3 +138,5 @@ exports.addWorkspaceSuccess = addWorkspaceSuccess;
 
 exports.removeWorkspace = removeWorkspace;
 exports.removeWorkspaceSuccess = removeWorkspaceSuccess;
+
+// exports.setUserLocation = setUserLocation;
