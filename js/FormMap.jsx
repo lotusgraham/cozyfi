@@ -93,7 +93,7 @@ export default class FormMap extends React.Component {
       this.props.dispatch(actions.getUserLoc());
       // README: This puts a userLoc object in this.props.state.
       // You can change the map center by seting the <GoogleMap>
-      // 'center' attr.to this.props.state.userLoc, but then the map
+      // 'center' attr. to this.props.state.userLoc, but then the map
       // no longer changes boundaries or drops a new pin. Attempting to
       // set this.state.center within this function does not work.
 
@@ -103,10 +103,9 @@ export default class FormMap extends React.Component {
 
       this.state = {
           bounds: null,
-          center: ralDur, //Set initial state to hard-coded Raleigh coordinates
+          center: ralDur, //Set initial center to hard-coded Raleigh coordinates
           markers: []
       }
-      console.log(this.props.state)
   }
 
 
