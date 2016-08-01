@@ -7,6 +7,7 @@ const initialState = {
     lng: null,
     googleData: null,
 	workspaceSaved: false,
+    userLoc: null,
     placesService: new google.maps.places.PlacesService(document.createElement('div'))
 }
 
@@ -36,6 +37,12 @@ const workspaceReducer = (state, action) => {
         currentLng: {$set: action.lng}
     });
 		state = newState;
+    }
+    if (action.type === 'UPDATE_USER_LOC') {
+        let newState = update(state, {
+            userLoc: {$set: action.userLoc}
+        });
+        state = newState;;
     }
     return state;
 };
