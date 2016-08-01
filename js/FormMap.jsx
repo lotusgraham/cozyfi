@@ -80,13 +80,6 @@ export default class FormMap extends React.Component {
     //   setUserLocation();
       console.log('uno',mapCenter);
     let userCenter = mapCenter;
-
-      this.state = {
-          bounds: null,
-          center: mapCenter,
-          markers: []
-      }
-      console.log(this.state);
   }
 
 
@@ -127,25 +120,8 @@ export default class FormMap extends React.Component {
 
   }
   componentWillMount() {
-      var userCenter;
-      const getLocSuccess = function (userCenter, position) {
-          userCenter = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-          }
-          this.state = {
-              center: userCenter
-          }
-          console.log('center inside: ', userCenter);
-          return userCenter;
-
-      }
-
-      console.log('center before: ', userCenter);
-      navigator.geolocation.getCurrentPosition(getLocSuccess.bind(this, userCenter));
-      console.log('center after: ', userCenter);
-}
-
+      this.props.dispatch(actions.getUserLoc());
+  }
 
 
   render() {
@@ -182,6 +158,7 @@ export default class FormMap extends React.Component {
 }
 
 const mapStateToProps = (state, props) => {
+    console.log(state);
     return {
         state: state
     }

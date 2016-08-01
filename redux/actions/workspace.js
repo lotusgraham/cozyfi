@@ -95,16 +95,18 @@ const removeWorkspaceSuccess = (index) => {
 };
 
 const getUserLoc = function() {
-    const getUserLocSuccess = function (position) {
-        let userLoc = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
-        }
-        dispatch(updateUserLoc(userLoc))
+    return function(dispatch) {
+        const getUserLocSuccess = function (dispatch, position) {
+            let userLoc = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+            dispatch(updateUserLoc(userLoc))
+    }
+    navigator.geolocation.getCurrentPosition(getUserLocSuccess.bind(this, dispatch));
+    }
 }
-navigator.geolocation.getCurrentPosition(updateUserLoc);
 
-}
 
 const updateUserLoc = (userLoc) => {
     return {
