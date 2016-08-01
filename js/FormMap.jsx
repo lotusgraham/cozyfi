@@ -6,6 +6,8 @@ import store from '../redux/store.js';
 
 import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
+import update from 'react-addons-update';
+
 const searchStyles = {
     border: '1px solid transparent',
     borderRadius: '1px',
@@ -22,9 +24,9 @@ const searchStyles = {
     width: '350px',
 }
 
-const mapCenter = {
+let ralDur = {
     lat: 36.002453,
-    lng: -78.905869,
+    lng: -78.9058,
 }
 
 export default class FormMap extends React.Component {
@@ -33,26 +35,13 @@ export default class FormMap extends React.Component {
       //BINDS THIS TO EACH FUNCTION
       this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
-      this.initMap = this.initMap.bind(this);
+      this.componentWillMount = this.componentWillMount.bind(this);
 
-      this.state = {
-          bounds: null,
-          center: mapCenter,
-          markers: []
-      }
   }
 
-  // let mapCenter = {
-  //     lat: 36.002453,
-  //     lng: -78.905869,
-  // }
 
-  handleBoundsChanged() {
-    this.setState({
-      bounds: this.refs.map.getBounds(),
-      center: this.refs.map.getCenter(),
-    });
-  }
+  handleBoundsChanged() {}
+
 
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
@@ -73,46 +62,28 @@ export default class FormMap extends React.Component {
 
     // Set markers; set map center to first search result
     const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
-
-    this.setState({
+    this.state = {
       center: mapCenter,
       markers
-    });
+    };
     this.props.dispatch(actions.setCurrentPlace(place));
 
   }
+  componentWillMount() {
+      this.props.dispatch(actions.getUserLoc());
 
-  initMap() {
-    //  var map = new google.maps.Map( {
-    //    center: this.state.center,
-    //    zoom: 15
-    //  });
+      this.state = {
+          bounds: null,
+          center: ralDur, //Set initial center to hard-coded Raleigh coordinates
+          markers: []
+      }
+  }
 
-     var infowindow = new google.maps.InfoWindow();
-     var service = new google.maps.places.PlacesService(mapCenter);
 
-     service.getDetails({
-         //need to find out how to get grab placeId from marker
-       placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-     }, function(place, status) {
-       if (status === google.maps.places.PlacesServiceStatus.OK) {
-         var marker = new google.maps.Marker({
-           map: mapCenter,
-           position: place.geometry.location
-         });
-         google.maps.event.addListener(marker, 'click', function() {
-           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-             'Place ID: ' + place.place_id + '<br>' +
-             place.formatted_address + '</div>');
-           infowindow.open(mapCenter, this);
-         });
-       }
-     });
-   }
   render() {
     return (
       <GoogleMap
-        center={this.state.center}
+        center={this.props.state.userLoc}
         containerProps={{
           style: {
             height: '400px',
@@ -133,10 +104,8 @@ export default class FormMap extends React.Component {
         />
         {this.state.markers.map((marker, index) => (
           <Marker position={marker.position}
-                  place='ChIJLcOqFtbarIkRnyH30OdQzUg'
                   key={index} />
         ))}
-        <Marker place='ChIJLcOqFtbarIkRnyH30OdQzUg'></Marker>
       </GoogleMap>
     );
   }

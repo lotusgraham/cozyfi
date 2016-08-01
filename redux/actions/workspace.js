@@ -61,8 +61,13 @@ const addWorkspace = (workspace) => {
         dispatch(addWorkspaceSuccess(workspace));
         workspacesRef.push(workspace);
 
+        // let geoFire = new GeoFire(workspacesRef);
+        // geoFire.push(workspace);
+        console.log("AAGASAASSAGAGA", workspace.lng);
+        console.log("agajghajgagka", workspace.lat);
     }
 };
+
 
 const addWorkspaceSuccess = (workspace) => {
     return {
@@ -89,6 +94,30 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
+const getUserLoc = function() {
+    return function(dispatch, getState) {
+        const getUserLocSuccess = function (dispatch, position) {
+            let userLoc = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            }
+            dispatch(updateUserLoc(userLoc))
+    }
+    navigator.geolocation.getCurrentPosition(getUserLocSuccess.bind(this, dispatch));
+    }
+}
+
+
+const updateUserLoc = (userLoc) => {
+    return {
+        type: 'UPDATE_USER_LOC',
+        userLoc
+    }
+}
+
+
+
+
 exports.setCurrentPlace = setCurrentPlace;
 exports.fetchWorkspaceData = fetchWorkspaceData;
 exports.fetchMapData = fetchMapData;
@@ -99,3 +128,6 @@ exports.addWorkspaceSuccess = addWorkspaceSuccess;
 
 exports.removeWorkspace = removeWorkspace;
 exports.removeWorkspaceSuccess = removeWorkspaceSuccess;
+
+exports.getUserLoc = getUserLoc;
+exports.updateUserLoc = updateUserLoc;
