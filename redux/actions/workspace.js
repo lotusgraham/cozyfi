@@ -94,38 +94,26 @@ const removeWorkspaceSuccess = (index) => {
     }
 };
 
+const getUserLoc = function() {
+    const getUserLocSuccess = function (position) {
+        let userLoc = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        }
+        dispatch(updateUserLoc(userLoc))
+}
+navigator.geolocation.getCurrentPosition(updateUserLoc);
 
-//////////ACTION OF SETTING THE USER LOCATION ON THE FORM MAP
+}
 
-
-// const setUserLocation = (success, fail) => {
-//     if (navigator && navigator.geolocation) {
-//         navigator.geolocation.getCurrentPosition((pos) => {
-//             success(pos.coords.latitude, pos.coords.longitude);
-//         }, () => {
-//             fail();
-//         });
-//     } else {
-//         fail();
-//     };
-//     const success = (lat, lng) => {
-//         alert(lat + " , " + lng);
-//     }
-//     const fail = () => {
-//         alert("Please refresh the page and accept the prompt to allow us to use your current location with the application.");
-//     }
-// }
+const updateUserLoc = (userLoc) => {
+    return {
+        type: 'UPDATE_USER_LOC',
+        userLoc
+    }
+}
 
 
-//////////ACTION
-
-
-// const setUserLocationSuccess = (coords) => {
-//     return {
-//         type: 'GET_USER_LOCATION_SUCCESS',
-//         coords
-//     }
-// }
 
 
 exports.setCurrentPlace = setCurrentPlace;
@@ -139,4 +127,5 @@ exports.addWorkspaceSuccess = addWorkspaceSuccess;
 exports.removeWorkspace = removeWorkspace;
 exports.removeWorkspaceSuccess = removeWorkspaceSuccess;
 
-// exports.setUserLocation = setUserLocation;
+exports.getUserLoc = getUserLoc;
+exports.updateUserLoc = updateUserLoc;
