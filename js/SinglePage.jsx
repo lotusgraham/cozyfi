@@ -11,7 +11,7 @@ import Cardz from './Cardz';
 
 import AddButton from './AddButton';
 
-
+import PlaceInfo from './PlaceInfo'
 
 
 const styles = {
@@ -42,7 +42,6 @@ const styles = {
         "padding": `0 12px`,
         "textOverflow": `ellipses`,
         "width": `400px`
-    
     }
 
 }
@@ -61,6 +60,7 @@ class SinglePage extends React.Component {
         return (
             <div className = "singlePage" style={styles.container}>
                 <div className="cardz" style={styles.cardz}> <Cardz/> </div>
+                <PlaceInfo />
                 <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
             </div>
         )
