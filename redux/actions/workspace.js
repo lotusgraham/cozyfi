@@ -1,6 +1,13 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
+var GeoFire = require('geofire');
+
+
+let firebaseRef = firebaseApp.ref('geoFire');
+let geoFire = new GeoFire(firebaseRef);
+
+
 const setCurrentPlace = (place) => {
     return {
         type: 'SET_CURRENT_PLACE',
@@ -12,8 +19,17 @@ const setCurrentPlace = (place) => {
 
 
 const fetchWorkspaceData = (filterParams) => {
-    return (dispatch) => {
-        let placesArray = []
+    return (dispatch, getState) => {
+        var query = geoFire.query({
+             center: [getState().userLoc.lat, getState().userLoc.lng],
+             radius: 80.5
+         });
+         var onEntered = query.on('key_entered', function(key) {
+             dispatch(fetchSingleWorkspaceData(key));
+        });
+         query.on('ready', function() {
+             onEntered.cancel();
+         });
         let workspacesRef = firebaseApp.ref('/workspaces/');
         workspacesRef.once('value').then(snapshot => {
         const data = snapshot.val();
@@ -23,35 +39,36 @@ const fetchWorkspaceData = (filterParams) => {
     }
 }
 
-const fetchMapData = (workspaces) => {
-    return (dispatch, getState) => {
-        let service = getState().placesService;
-        let mergedWorkspaces = [];
-        let count = workspaces.length
-
-        for (var i = 0; i < workspaces.length; i +=1) {
-            var request = {
-                placeId: workspaces[i].placeId
-            }
-            service.getDetails(request, function(workspace, place, status) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                    var workspaceWithGData =
-                        Object.assign({}, workspace, {googleData: place});
-                    mergedWorkspaces.push(workspaceWithGData);
-                    count --;
-                }
-                if (count === 0){
-                    dispatch(updateWorkspaceCache(mergedWorkspaces));
-                }
-            }.bind(null, workspaces[i]));
-        }
+const fetchSingleWorkspaceData = (workspaceKey) => {
+    return (dispatch) => {
+        let workspaceRef = firebaseApp.ref('/workspaces/' + workspaceKey);
+        workspaceRef.once('value').then(snapshot => {
+            const data = snapshot.val();
+            dispatch(fetchMapData(data));
+        });
     }
 }
 
-const updateWorkspaceCache = (workspaces) => {
+const fetchMapData = (workspace) => {
+    return (dispatch, getState) => {
+        let service = getState().placesService;
+
+        var request = {
+            placeId: workspace.placeId
+        }
+        service.getDetails(request, function(place, status) {
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                var workspaceWithGData = Object.assign({}, workspace, {googleData: place});
+                dispatch(updateWorkspaceCache(workspaceWithGData));
+            }
+        })
+    }
+}
+
+const updateWorkspaceCache = (workspace) => {
     return {
         type: 'UPDATE_WORKSPACE_CACHE',
-        workspaces
+        workspace
     }
 }
 
@@ -59,12 +76,8 @@ const addWorkspace = (workspace) => {
     return function(dispatch) {
         let workspacesRef = firebaseApp.ref('/workspaces/');
         dispatch(addWorkspaceSuccess(workspace));
-        workspacesRef.push(workspace);
-
-        // let geoFire = new GeoFire(workspacesRef);
-        // geoFire.push(workspace);
-        console.log("AAGASAASSAGAGA", workspace.lng);
-        console.log("agajghajgagka", workspace.lat);
+        var workspaceRef = workspacesRef.push(workspace);
+        geoFire.set(workspaceRef.key, [workspace.lat, workspace.lng]);
     }
 };
 
@@ -96,14 +109,17 @@ const removeWorkspaceSuccess = (index) => {
 
 const getUserLoc = function() {
     return function(dispatch, getState) {
-        const getUserLocSuccess = function (dispatch, position) {
-            let userLoc = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
+        return new Promise((resolve, reject) => {
+            const getUserLocSuccess = function (dispatch, position) {
+                let userLoc = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                }
+                dispatch(updateUserLoc(userLoc));
+                resolve();
             }
-            dispatch(updateUserLoc(userLoc))
-    }
-    navigator.geolocation.getCurrentPosition(getUserLocSuccess.bind(this, dispatch));
+            navigator.geolocation.getCurrentPosition(getUserLocSuccess.bind(this, dispatch));
+        });
     }
 }
 
