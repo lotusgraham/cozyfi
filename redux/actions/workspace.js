@@ -1,6 +1,13 @@
 var firebaseApp = require('../../js/Firebase.jsx');
 require('isomorphic-fetch');
 
+var GeoFire = require('geofire');
+
+
+let firebaseRef = firebaseApp.ref('geoFire');
+let geoFire = new GeoFire(firebaseRef);
+
+
 const setCurrentPlace = (place) => {
     return {
         type: 'SET_CURRENT_PLACE',
@@ -22,12 +29,16 @@ const fetchWorkspaceData = (filterParams) => {
         });
 
         //creates new instance of GeoFire
-        let firebaseRef = firebaseApp.ref('geoFire');
-        let geoFire = new GeoFire(firebaseRef);
-        var geoQuery;
-
-        //creates an unordered list of workspaces
-        $ul
+        // let firebaseRef = firebaseApp.ref('geoFire');
+        // let geoFire = new GeoFire(firebaseRef);
+        // var geoQuery;
+        //
+        // //creates an unordered list of workspaces
+        // $ul = $('ul#workspaces');
+        //
+        // workspaces.on('child_added', (snapshot) => {
+        //     $ul.append('<li>' + snapshot + '</li>');
+        // }
 
     }
 }
@@ -68,8 +79,8 @@ const addWorkspace = (workspace) => {
     return function(dispatch) {
         let workspacesRef = firebaseApp.ref('/workspaces/');
         dispatch(addWorkspaceSuccess(workspace));
-        workspacesRef.push(workspace);
-
+        var workspaceRef = workspacesRef.push(workspace);
+        geoFire.set(workspaceRef.key, [workspace.lat, workspace.lng]);
         // let geoFire = new GeoFire(workspacesRef);
         // geoFire.push(workspace);
         console.log("AAGASAASSAGAGA", workspace.lng);

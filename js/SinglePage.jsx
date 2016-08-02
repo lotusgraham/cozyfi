@@ -51,12 +51,22 @@ const styles = {
 
 // toggle={this.props.state.tilesData[index].expanded}
 
-const SinglePage = () => (
-        <div className = "singlePage" style={styles.container}>
-            <div className="cardz" style={styles.cardz}> <Cardz/> </div>
-            <div><AddButton /></div>
-            <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /> </div>
-        </div>
-);
 
-export default SinglePage;
+class SinglePage extends React.Component {
+    componentWillMount() {
+        this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
+    }
+    render () {
+        return (
+            <div className = "singlePage" style={styles.container}>
+                <div className="cardz" style={styles.cardz}> <Cardz/> </div>
+                <div><AddButton /></div>
+                <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
+            </div>
+        )
+    }
+}
+
+const Container = connect()(SinglePage);
+
+export default Container;

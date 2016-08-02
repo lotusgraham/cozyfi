@@ -26,12 +26,7 @@ class Cardz extends React.Component {
     this.setState(newState);
   };
 
-  componentWillMount() {
-      this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
-
-
-
-  };
+  
 
 updateCard() {
     var newState = update(this.state, {
