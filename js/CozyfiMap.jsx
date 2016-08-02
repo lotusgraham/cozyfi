@@ -103,7 +103,7 @@ export default class CozyFiMap extends React.Component {
         containerProps={{
           style: {
             height: '750px',
-            width: '500',
+            width: '600',
           },
         }}
         defaultZoom={15}
