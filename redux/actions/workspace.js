@@ -20,10 +20,15 @@ const fetchWorkspaceData = (filterParams) => {
         const workspaces = Object.keys(data).map(key => data[key]);
             dispatch(fetchMapData(workspaces));
         });
-        
+
         //creates new instance of GeoFire
-        var geoFire = new GeoFire(firebaseRef);
+        let firebaseRef = firebaseApp.ref('geoFire');
+        let geoFire = new GeoFire(firebaseRef);
         var geoQuery;
+
+        //creates an unordered list of workspaces
+        $ul
+
     }
 }
 
