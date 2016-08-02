@@ -15,7 +15,7 @@ const workspaceReducer = (state, action) => {
 	state = state || initialState;
     if (action.type ==='UPDATE_WORKSPACE_CACHE') {
         let newState = update(state, {
-            workspaceCache: {$set: action.workspaces}
+            workspaceCache: {$push: [action.workspace]}
         });
         state = newState;
     }

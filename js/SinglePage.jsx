@@ -54,7 +54,9 @@ const styles = {
 
 class SinglePage extends React.Component {
     componentWillMount() {
-        this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
+        this.props.dispatch(actions.getUserLoc()).then(() => {
+            return this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
+        });
     }
     render () {
         return (
