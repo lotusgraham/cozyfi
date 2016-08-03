@@ -6,7 +6,7 @@ import store from '../redux/store.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import update from 'react-addons-update';
 
-import CozyFiMap from './cozyfimap.jsx';
+import CozyFiMap from './CozyFiMap.jsx';
 import Cardz from './Cardz';
 
 import AddButton from './AddButton';
