@@ -26,7 +26,9 @@ class Cardz extends React.Component {
     this.setState(newState);
   };
 
-
+// save index to the state
+//set clicked on workspace to index, set that in the state as focused workspace
+// in PlaceInfo instead of workspace[0] do state.focusedWorkspace
 
 updateCard() {
     var newState = update(this.state, {

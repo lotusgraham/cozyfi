@@ -12,31 +12,24 @@ import update from 'react-addons-update';
 class PlaceInfo extends React.Component {
   constructor(props) {
      super(props);
-     this.state = {tilesData: []};
  };
 
-handleToggle(toggle, index, event) {
-    var newState = update(this.state, {tilesData: {[index]: {expanded: {$set: toggle}}}})
-    console.log(index)
-    console.log(newState);
-    this.setState(newState);
-  };
  render() {
-var comboinfo = this.props.workspaceCache.map((tile, index) => {
-      console.log('strung: ', tile);
-      return(
-          <Card>
-           <CardHeader
-           onClick={this.handleToggle.bind(this, !tile.expanded, index)}
-            title={tile.placeData}
-            subtitle={tile.description}
-            actAsExpander={true}
-            showExpandableButton={true}
-           />
-           </Card>)
-   })
         return (
-            <div className="zoneinfo">{comboinfo}</div>
+            <div className="zoneinfo">{<Card>
+             <CardHeader
+              title={this.props.workspace.googleData}
+              subtitle={this.props.workspace.description}
+             />
+              <CardText expandable={true}>
+                  <ul>
+                    <li>{tile.description}</li>
+                    <li>{tile.directions}</li>
+                    <li>{tile.perks}</li>
+                    <li>{tile.quirks}</li>
+                  </ul>
+              </CardText>
+             </Card>}</div>
         );
     }
 };
@@ -45,7 +38,7 @@ var comboinfo = this.props.workspaceCache.map((tile, index) => {
 
 const mapStateToProps = (state, props) => {
     return {
-        workspaceCache: state.workspaceCache
+        workspace: state.workspaceCache[0] || {}
     }
 };
 
