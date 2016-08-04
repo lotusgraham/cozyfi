@@ -33,15 +33,10 @@ export default class FormMap extends React.Component {
   constructor() {
       super();
       //BINDS THIS TO EACH FUNCTION
-      this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
       this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
       this.componentWillMount = this.componentWillMount.bind(this);
 
   }
-
-
-  handleBoundsChanged() {}
-
 
   handlePlacesChanged() {
     const places = this.refs.searchBox.getPlaces();
