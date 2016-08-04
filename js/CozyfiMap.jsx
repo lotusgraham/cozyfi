@@ -2,6 +2,12 @@ import React, { Component } from "react";
 
 import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
 
+import {connect} from 'react-redux';
+
+import * as actions from '../redux/actions/workspace.js';
+
+import update from 'react-addons-update';
+
 const searchStyles = {
     border: '1px solid transparent',
     borderRadius: '1px',
@@ -17,93 +23,60 @@ const searchStyles = {
     width: '400px',
 }
 
-const mapCenter = {
+const ralDur = {
     lat: 36.002453,
-    lng: -78.905869,
+    lng: -78.9058,
 }
 
 export default class CozyFiMap extends React.Component {
-  constructor() {
-      super();
-      //BINDS THIS TO EACH FUNCTION
-      this.handleBoundsChanged = this.handleBoundsChanged.bind(this);
-      this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
-      this.initMap = this.initMap.bind(this);
+    constructor() {
+        super();
+        //BINDS THIS TO EACH FUNCTION
+        this.handlePlacesChanged = this.handlePlacesChanged.bind(this);
+        this.componentWillMount = this.componentWillMount.bind(this);
+    }
 
-      this.state = {
-          bounds: null,
-          center: mapCenter,
-          markers: []
-      }
-  }
+    handlePlacesChanged() {
+        const places = this.refs.searchBox.getPlaces();
+        const placeId = places[0].place_id;
+        const place = {
+            placeId: places[0].place_id,
+            lat: places[0].geometry.location.lat(),
+            lng: places[0].geometry.location.lng()
+        };
+        const markers = [];
 
-  // let mapCenter = {
-  //     lat: 36.002453,
-  //     lng: -78.905869,
-  // }
+        // Add a marker for each place returned from search bar
+        places.forEach(function (place) {
+            markers.push({position: place.geometry.location});
+        });
 
-  handleBoundsChanged() {
-    this.setState({
-      bounds: this.refs.map.getBounds(),
-      center: this.refs.map.getCenter(),
-    });
-  }
+        // Set markers; set map center to first search result
+        const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
 
-  handlePlacesChanged() {
-    const places = this.refs.searchBox.getPlaces();
-    const markers = [];
+        this.state = {center: mapCenter, markers};
 
-    // Add a marker for each place returned from search bar
-    places.forEach(function (place) {
-      markers.push({
-        position: place.geometry.location,
-      });
-    });
+        this.props.dispatch(actions.setCurrentPlace(place));
 
-    // Set markers; set map center to first search result
-    const mapCenter = markers.length > 0 ? markers[0].position : this.state.center;
+    }
 
-    this.setState({
-      center: mapCenter,
-      markers,
-    });
-  }
+    componentWillMount() {
+        this.props.dispatch(actions.getUserLoc());
+        this.state = {
+            bounds: null,
+            center: ralDur, //Set initial center to hard-coded Raleigh coordinates
+            markers: []
+        }
+    }
 
-  initMap() {
-    //  var map = new google.maps.Map( {
-    //    center: this.state.center,
-    //    zoom: 15
-    //  });
-
-     var infowindow = new google.maps.InfoWindow();
-     var service = new google.maps.places.PlacesService(mapCenter);
-
-     service.getDetails({
-         //need to find out how to get grab placeId from marker
-       placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
-     }, function(place, status) {
-       if (status === google.maps.places.PlacesServiceStatus.OK) {
-         var marker = new google.maps.Marker({
-           map: mapCenter,
-           position: place.geometry.location
-         });
-         google.maps.event.addListener(marker, 'click', function() {
-           infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
-             'Place ID: ' + place.place_id + '<br>' +
-             place.formatted_address + '</div>');
-           infowindow.open(mapCenter, this);
-         });
-       }
-     });
-   }
   render() {
     return (
       <GoogleMap
-        center={this.state.center}
+        center={this.props.state.userLoc}
         containerProps={{
           style: {
             height: '750px',
-            width: '500',
+            width: '600',
           },
         }}
         defaultZoom={15}
@@ -120,11 +93,18 @@ export default class CozyFiMap extends React.Component {
         />
         {this.state.markers.map((marker, index) => (
           <Marker position={marker.position}
-                  place='ChIJLcOqFtbarIkRnyH30OdQzUg'
                   key={index} />
         ))}
-        <Marker place='ChIJLcOqFtbarIkRnyH30OdQzUg'></Marker>
       </GoogleMap>
     );
   }
 }
+
+const mapStateToProps = (state, props) => {
+    return {
+        state: state
+    }
+}
+
+const Container = connect(mapStateToProps)(CozyFiMap);
+export default Container;

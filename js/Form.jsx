@@ -103,9 +103,12 @@ const Form = React.createClass({
   },
 
   submitForm(formData) {
-      console.log(this.props.state);
-      let completeWorkspace = Object.assign({}, formData, {placeId: this.props.currentPlace});
-      console.log(completeWorkspace);
+      let placeData = {
+          placeId: this.props.currentPlace,
+          lat: this.props.currentLat,
+          lng: this.props.currentLng
+      }
+      let completeWorkspace = Object.assign({}, formData, placeData);
       this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },
 
@@ -221,8 +224,11 @@ const Form = React.createClass({
 });
 
 const mapStateToProps = (state, props) => {
+    console.log('FORMSTATE: ', state)
     return {
-        currentPlace: state.currentPlace
+        currentPlace: state.currentPlace,
+        currentLat: state.currentLat,
+        currentLng: state.currentLng
     }
 };
 

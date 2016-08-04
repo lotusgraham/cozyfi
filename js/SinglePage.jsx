@@ -6,12 +6,12 @@ import store from '../redux/store.js';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import update from 'react-addons-update';
 
-import CozyFiMap from './cozyfimap.jsx';
+import CozyFiMap from './CozyFiMap.jsx';
 import Cardz from './Cardz';
 
 import AddButton from './AddButton';
 
-const imgUrl = 'http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg'
+import PlaceInfo from './PlaceInfo'
 
 
 const styles = {
@@ -19,13 +19,10 @@ const styles = {
         flex: .3,
         flexDirection: 'row',
         display: 'flex',
-        justifyContent: 'flex-end',
         height: 750,
         overflowY: 'auto',
         marginBottom: 24,
         color: 'white',
-        backgroundImage: 'url(' + imgUrl + ')',
-        backgroundSize: "cover",
         WebkitTransition: 'all', // note the capital 'W' here
         msTransition: 'all' // 'ms' is the only lowercase vendor prefix
     },
@@ -49,14 +46,27 @@ const styles = {
 
 }
 
+
 // toggle={this.props.state.tilesData[index].expanded}
 
-const SinglePage = () => (
-        <div className = "singlePage" style={styles.container}>
-            <div className="cardz" style={styles.cardz}> <Cardz/> </div>
-            <div><AddButton /></div>
-            <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /> </div>
-        </div>
-);
 
-export default SinglePage;
+class SinglePage extends React.Component {
+    componentWillMount() {
+        this.props.dispatch(actions.getUserLoc()).then(() => {
+            return this.props.dispatch(actions.fetchWorkspaceData()); // puts the data in the store
+        });
+    }
+    render () {
+        return (
+            <div className = "singlePage" style={styles.container}>
+                <div className="cardz" style={styles.cardz}> <Cardz/> </div>
+                <PlaceInfo />
+                <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
+            </div>
+        )
+    }
+}
+
+const Container = connect()(SinglePage);
+
+export default Container;
