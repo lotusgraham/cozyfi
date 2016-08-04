@@ -26,7 +26,7 @@ class Cardz extends React.Component {
     this.setState(newState);
   };
 
-  
+
 
 updateCard() {
     var newState = update(this.state, {
