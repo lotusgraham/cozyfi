@@ -55,8 +55,7 @@ updateCard() {
             title={tile.googleData.name}
             subtitle={tile.description}
             avatar="{tile.avatar}"
-            actAsExpander={true}
-            showExpandableButton={true}
+        
           />
         </Card>)
     })

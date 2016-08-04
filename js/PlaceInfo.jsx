@@ -19,7 +19,7 @@ class PlaceInfo extends React.Component {
             <div className="zoneinfo">{<Card>
              <CardHeader
               title={this.props.googleData.name}
-              subtitle={this.props.workspace.description}
+              subtitle={this.props.googleData.formatted_address}
              />
               <CardText>
                   <ul>
