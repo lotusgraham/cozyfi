@@ -26,7 +26,9 @@ class Cardz extends React.Component {
     this.setState(newState);
   };
 
-  
+// save index to the state
+//set clicked on workspace to index, set that in the state as focused workspace
+// in PlaceInfo instead of workspace[0] do state.focusedWorkspace
 
 updateCard() {
     var newState = update(this.state, {
@@ -50,32 +52,11 @@ updateCard() {
           expanded="{tile.expanded}"
           onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
           <CardHeader
-            title={tile.placeData}
+            title={tile.googleData.name}
             subtitle={tile.description}
             avatar="{tile.avatar}"
-            actAsExpander={true}
-            showExpandableButton={true}
+
           />
-          <CardText>
-          </CardText>
-          <CardMedia
-            inlineStyle={styles.cardz}
-            expandable={true}
-            overlay={<CardTitle title={tile.placeData} subtitle="Overlay subtitle" />}
-          >
-            <img src="{tile.img}" />
-          </CardMedia>
-          <CardTitle title={tile.placeData} subtitle="Card subtitle" expandable={true} />
-          <CardText expandable={true}>
-              <ul>
-                  <li>{tile.description}</li>
-                  <li>{tile.directions}</li>
-                  <li>{tile.perks}</li>
-                  <li>{tile.quirks}</li>
-              </ul>
-          </CardText>
-          <CardActions>
-          </CardActions>
         </Card>)
     })
     return (

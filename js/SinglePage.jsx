@@ -8,8 +8,10 @@ import update from 'react-addons-update';
 
 import CozyFiMap from './CozyFiMap.jsx';
 import Cardz from './Cardz';
+import PlaceInfo from './PlaceInfo'
+import Instructions from './Instructions'
+import AddButton from './AddButton'
 
-import AddButton from './AddButton';
 
 const imgUrl = 'http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg'
 
@@ -62,7 +64,9 @@ class SinglePage extends React.Component {
         return (
             <div className = "singlePage" style={styles.container}>
                 <div className="cardz" style={styles.cardz}> <Cardz/> </div>
-                <div><AddButton /></div>
+                <div><PlaceInfo /></div>
+          <div className="addbutton"><AddButton /></div>
+
                 <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
             </div>
         )
