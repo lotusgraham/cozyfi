@@ -11,7 +11,7 @@
     "build:html": "npm run clean:html && cp index.html build/",
     "watch:html": "npm run build:html && chokidar index.html -c 'npm run build:html'",
     "clean:html": "rm -f build/index.html",
-    "build:css": "npm run clean:css && cp style.css build/",
+    "build:css": "npm run clean:css && cp ./style.css build/",
     "watch:css": "npm run build:css && chokidar style.css -c 'npm run build:css'",
     "clean:css": "rm -f build/style.css",
     "build:js": "npm run clean:js && webpack",
