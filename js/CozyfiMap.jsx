@@ -99,7 +99,7 @@ export default class CozyFiMap extends React.Component {
         />
     {this.props.workspaceCache.map((workspace, index) => (
           <Marker position={{lat: workspace.lat, lng: workspace.lng}}
-                  key={index} label={labels[labelIndex++ % labels.length]} />
+                  key={index} label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name} />
         ))}
       </GoogleMap>
     );
