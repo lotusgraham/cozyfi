@@ -66,7 +66,7 @@ export default class CozyFiMap extends React.Component {
     }
 
     handleWindows() {
-
+        //TODO: enable show/hide of windows.
     }
 
     componentWillMount() {
