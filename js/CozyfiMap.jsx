@@ -65,6 +65,10 @@ export default class CozyFiMap extends React.Component {
 
     }
 
+    handleWindows() {
+
+    }
+
     componentWillMount() {
         this.props.dispatch(actions.getUserLoc());
         this.state = {
@@ -105,14 +109,15 @@ export default class CozyFiMap extends React.Component {
     {this.props.workspaceCache.map((workspace, index) => (
           <Marker
               position={{lat: workspace.lat, lng: workspace.lng}}
-              key={index} label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name}>
-              <InfoWindow >
+              key={index}
+              label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name}
+              onClick={this.handleWindows()}>
+              <InfoWindow key={index}>
                   <div style={infoStyles}>
                       <p>{workspace.googleData.name}</p>
                       <p>{workspace.googleData.formatted_address}</p>
                       </div>
               </InfoWindow>
-
           </Marker>
 
         ))}
