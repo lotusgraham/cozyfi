@@ -63,12 +63,18 @@ class SinglePage extends React.Component {
             <div className = "singlePage" style={styles.container}>
                 <div className="cardz" style={styles.cardz}> <Cardz/> </div>
                 <div><AddButton /></div>
-                <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
+                <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap workspaceCache={this.props.workspaceCache}/></div>
             </div>
         )
     }
 }
 
-const Container = connect()(SinglePage);
+const mapStateToProps = (state, props) => {
+    return {
+        workspaceCache: state.workspaceCache || {}
+    }
+}
+
+const Container = connect(mapStateToProps)(SinglePage);
 
 export default Container;

@@ -65,11 +65,15 @@ export default class CozyFiMap extends React.Component {
         this.state = {
             bounds: null,
             center: ralDur, //Set initial center to hard-coded Raleigh coordinates
-            markers: []
+            markers: [{position: {
+                lat: 34.68647600000001,
+                lng: -118.16428400000001
+            }}]
         }
     }
 
   render() {
+      console.log(this.props.workspaceCache)
     return (
       <GoogleMap
         center={this.props.state.userLoc}
@@ -91,8 +95,8 @@ export default class CozyFiMap extends React.Component {
           placeholder="Enter the title of a Cozy-Coworking Space"
           style={searchStyles}
         />
-        {this.state.markers.map((marker, index) => (
-          <Marker position={marker.position}
+    {this.props.workspaceCache.map((workspace, index) => (
+          <Marker position={{lat: workspace.lat, lng: workspace.lng}}
                   key={index} />
         ))}
       </GoogleMap>
