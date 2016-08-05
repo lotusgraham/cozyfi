@@ -30,6 +30,7 @@ class PlaceInfo extends React.Component {
                     <li className="lists">{this.props.workspace.perks}</li>
                     <li className="lists">{this.props.workspace.quirks}</li>
                   </ul>
+              <div className="checkboxes"></div>
              </Card>}</div>
         );
     }
@@ -38,7 +39,11 @@ class PlaceInfo extends React.Component {
 
 
 const mapStateToProps = (state, props) => {
-  var workspace = state.workspaceCache[0] || {}
+  console.log(state);
+  var index = state.clicker || 0
+  console.log(state.clicker);
+
+  var workspace = state.workspaceCache[index] || {}
     return {
         workspace: workspace,
         googleData: workspace.googleData || {}

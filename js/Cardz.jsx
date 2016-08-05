@@ -20,7 +20,7 @@ class Cardz extends React.Component {
 };
 
   handleToggle(toggle, index, event) {
-    var newState = update(this.state, {tilesData: {[index]: {expanded: {$set: toggle}}}})
+        var newState = update(this.props, {clicker: {$set: index}})
     console.log(index)
 
     this.setState(newState);
@@ -47,17 +47,38 @@ updateCard() {
     var tiles = this.props.workspaceCache.map((tile, index) => {
       console.log('strung: ', tile);
       return(
-      <Card
-          onClick={this.handleToggle.bind(this, !tile.expanded, index)}
-          expanded="{tile.expanded}"
-          onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
-          <CardHeader
-            title={tile.googleData.name}
-            subtitle={tile.description}
-            avatar="{tile.avatar}"
-
-          />
-        </Card>)
+        <Card
+            onClick={this.handleToggle.bind(this, !tile.expanded, index)}
+            expanded={tile.expanded}
+            onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
+            <CardHeader
+              title={tile.placeData}
+              subtitle={tile.description}
+              avatar="{tile.avatar}"
+              actAsExpander={true}
+              showExpandableButton={true}
+            />
+            <CardText>
+            </CardText>
+            <CardMedia
+              inlineStyle={styles.cardz}
+              expandable={true}
+              overlay={<CardTitle title={tile.placeData} subtitle="Overlay subtitle" />}
+            >
+              <img src="{tile.img}" />
+            </CardMedia>
+            <CardTitle title={tile.placeData} subtitle="Card subtitle" expandable={true} />
+            <CardText expandable={true}>
+                <ul>
+                    <li>{tile.description}</li>
+                    <li>{tile.directions}</li>
+                    <li>{tile.perks}</li>
+                    <li>{tile.quirks}</li>
+                </ul>
+            </CardText>
+            <CardActions>
+            </CardActions>
+          </Card>)
     })
     return (
         <div>
