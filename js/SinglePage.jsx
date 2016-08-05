@@ -11,7 +11,7 @@ import Cardz from './Cardz';
 
 import AddButton from './AddButton';
 
-import PlaceInfo from './PlaceInfo'
+const imgUrl = 'http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg'
 
 
 const styles = {
@@ -19,10 +19,13 @@ const styles = {
         flex: .3,
         flexDirection: 'row',
         display: 'flex',
+        justifyContent: 'flex-end',
         height: 750,
         overflowY: 'auto',
         marginBottom: 24,
         color: 'white',
+        backgroundImage: 'url(' + imgUrl + ')',
+        backgroundSize: "cover",
         WebkitTransition: 'all', // note the capital 'W' here
         msTransition: 'all' // 'ms' is the only lowercase vendor prefix
     },
@@ -46,7 +49,6 @@ const styles = {
 
 }
 
-
 // toggle={this.props.state.tilesData[index].expanded}
 
 
@@ -60,7 +62,7 @@ class SinglePage extends React.Component {
         return (
             <div className = "singlePage" style={styles.container}>
                 <div className="cardz" style={styles.cardz}> <Cardz/> </div>
-                <PlaceInfo />
+                <div><AddButton /></div>
                 <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
             </div>
         )
