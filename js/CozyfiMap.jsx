@@ -107,7 +107,10 @@ export default class CozyFiMap extends React.Component {
               position={{lat: workspace.lat, lng: workspace.lng}}
               key={index} label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name}>
               <InfoWindow >
-                  <div style={infoStyles}><p>{workspace.googleData.name}</p></div>
+                  <div style={infoStyles}>
+                      <p>{workspace.googleData.name}</p>
+                      <p>{workspace.googleData.formatted_address}</p>
+                      </div>
               </InfoWindow>
 
           </Marker>
