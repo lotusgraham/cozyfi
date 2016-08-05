@@ -47,7 +47,8 @@ updateCard() {
     var tiles = this.props.workspaceCache.map((tile, index) => {
       console.log('strung: ', tile);
       return(
-        <Card
+          <div>
+              <Card
             onClick={this.handleToggle.bind(this, !tile.expanded, index)}
             expanded={tile.expanded}
             onExpandChange={this.handleExpandChange} updateCard={this.updateCard.bind(this)}>
@@ -78,12 +79,13 @@ updateCard() {
             </CardText>
             <CardActions>
             </CardActions>
-          </Card>)
+          </Card>
+          <PlaceInfo index={index} workspaceCache={this.props.workspaceCache} /></div>
+      )
+
     })
     return (
-        <div>
             {tiles}
-        </div>
     );
   }
 }
