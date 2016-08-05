@@ -11,7 +11,7 @@ import Cardz from './Cardz';
 
 import AddButton from './AddButton';
 
-import PlaceInfo from './PlaceInfo'
+import Instructions from './Instructions'
 
 
 const styles = {
@@ -60,7 +60,7 @@ class SinglePage extends React.Component {
         return (
             <div className = "singlePage" style={styles.container}>
                 <div className="cardz" style={styles.cardz}> <Cardz/> </div>
-                <PlaceInfo />
+                <div><Instructions /></div>
                 <div className="cozyFiMap" style={styles.cozyfiMap}> <CozyFiMap /></div>
             </div>
         )
