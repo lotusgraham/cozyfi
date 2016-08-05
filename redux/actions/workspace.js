@@ -21,11 +21,11 @@ const setCurrentPlace = (place) => {
 const fetchWorkspaceData = (filterParams) => {
     return (dispatch, getState) => {
         const km = 0.621371;
-        const radius10 = Math.round(km * 10);
+        const radius = Math.round(km * 20);
 
         const query = geoFire.query({
              center: [getState().userLoc.lat, getState().userLoc.lng],
-             radius: radius10
+             radius: radius
          });
          var onEntered = query.on('key_entered', function(key) {
              dispatch(fetchSingleWorkspaceData(key));

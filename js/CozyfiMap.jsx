@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 
-import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
+import { GoogleMap, GoogleMapLoader, Marker, InfoWindow, SearchBox } from "react-google-maps";
 
 import {connect} from 'react-redux';
 
 import * as actions from '../redux/actions/workspace.js';
 
 import update from 'react-addons-update';
+
 
 const searchStyles = {
     border: '1px solid transparent',
@@ -21,6 +22,10 @@ const searchStyles = {
     padding: '0 12px',
     textOverflow: 'ellipses',
     width: '400px',
+}
+
+const infoStyles = {
+    color: 'black'
 }
 
 const ralDur = {
@@ -58,6 +63,10 @@ export default class CozyFiMap extends React.Component {
 
         this.props.dispatch(actions.setCurrentPlace(place));
 
+    }
+
+    handleWindows() {
+        //TODO: enable show/hide of windows.
     }
 
     componentWillMount() {
@@ -98,8 +107,19 @@ export default class CozyFiMap extends React.Component {
           style={searchStyles}
         />
     {this.props.workspaceCache.map((workspace, index) => (
-          <Marker position={{lat: workspace.lat, lng: workspace.lng}}
-                  key={index} label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name} />
+          <Marker
+              position={{lat: workspace.lat, lng: workspace.lng}}
+              key={index}
+              label={labels[labelIndex++ % labels.length]} title={workspace.googleData.name}
+              onClick={this.handleWindows()}>
+              <InfoWindow key={index}>
+                  <div style={infoStyles}>
+                      <p>{workspace.googleData.name}</p>
+                      <p>{workspace.googleData.formatted_address}</p>
+                      </div>
+              </InfoWindow>
+          </Marker>
+
         ))}
       </GoogleMap>
     );
