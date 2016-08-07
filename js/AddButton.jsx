@@ -4,7 +4,7 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import { Link } from 'react-router'
 
 const style = {
-  marginRight: 20,
+  margin: 20,
 };
 
 const AddButton = () => (

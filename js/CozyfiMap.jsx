@@ -91,10 +91,10 @@ export default class CozyFiMap extends React.Component {
         containerProps={{
           style: {
             height: '750px',
-            width: '500',
+            width: '620',
           },
         }}
-        defaultZoom={15}
+        defaultZoom={10}
         onBoundsChanged={this.handleBoundsChanged}
         ref="map"
       >
