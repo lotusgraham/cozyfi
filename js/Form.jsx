@@ -108,6 +108,7 @@ const Form = React.createClass({
           lat: this.props.currentLat,
           lng: this.props.currentLng
       }
+      alert('Thanks, We appreicate your sumbission! Thanks for contributing to Cozyfi! Please click the \'Back\' button in your browser and refresh the page to see your entry');
       let completeWorkspace = Object.assign({}, formData, placeData);
       this.props.dispatch(actions.addWorkspace(completeWorkspace));
   },

@@ -9,6 +9,7 @@ const initialState = {
 	workspaceSaved: false,
     userLoc: null,
     placesService: new google.maps.places.PlacesService(document.createElement('div'))
+		// placePhotos:   new google.maps.places.PlacesService().getDetails()
 }
 
 const workspaceReducer = (state, action) => {
@@ -32,7 +33,7 @@ const workspaceReducer = (state, action) => {
     }
 	if (action.type === 'SET_CURRENT_PLACE') {
 		let newState = update(state, {
-		currentPlace: {$set: action.placeId},
+				currentPlace: {$set: action.placeId},
         currentLat: {$set: action.lat},
         currentLng: {$set: action.lng},
         userLoc: {$set: {lat: action.lat, lng: action.lng}}
