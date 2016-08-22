@@ -4,7 +4,59 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1">
   <title>CozyFi</title>
-  <!-- <script src="https://maps.googleapis.com/maps/api/js"></script> -->
+  <noscript>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      <style media="screen">
+      * {
+          box-sizing: border-box;
+      }
+      .nojs-container {
+          z-index: 0;
+      }
+        .nojs-container::before{
+        content: "";
+        z-index: -1;
+
+        display: block;
+        background-image: url("http://thepurposeisprofit.com/wp-content/uploads/2014/07/Fiap-paulista-coworking.jpg");
+        background-position: 50% 60%;
+
+        -webkit-filter: blur(5px);
+        -moz-filter: blur(5px);
+        -o-filter: blur(5px);
+        -ms-filter: blur(5px);
+        filter: blur(5px);
+    }
+
+    .nojs-container, .nojs-container::before {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+
+
+    }
+
+    .nojs-alert {
+        width: 75%;
+        padding: 1em;
+        margin: 7em auto;
+        font-family: "Roboto", sans-serif;
+        text-align:center;
+        line-height: 1.4rem;
+        background-color: white;
+    }
+      </style>
+      <div class="nojs-container">
+          <div class="nojs-alert">
+              <p>Please <a href="http://enable-javascript.com/">enable JavaScript</a> to use CozyFi! An HTML-First version of CozyFi is coming soon!</p>
+              <p>If you think you're seeing this message in error, please <a href="https://github.com/lotusgraham/cozyfi/issues">report an issue</a> to us.</p>
+          </div>
+      </div>
+  </noscript>
 </head>
 <body>
   <div id="app"></div>
