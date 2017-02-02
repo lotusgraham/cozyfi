@@ -1,17 +1,17 @@
-import React from 'react';
-import { Router, Route, Link } from 'react-router'
+import React from 'react'
+// import { Route, Link } from 'react-router'
 
-import {connect} from 'react-redux';
-import * as actions from '../redux/actions/workspace.js';
-import store from '../redux/store.js';
+import {connect} from 'react-redux'
+import * as actions from '../redux/actions/workspace.js'
+// import store from '../redux/store.js'
 
-import Formsy from 'formsy-react';
-import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
-import MenuItem from 'material-ui/MenuItem';
+import Formsy from 'formsy-react'
+import Paper from 'material-ui/Paper'
+import RaisedButton from 'material-ui/RaisedButton'
+import MenuItem from 'material-ui/MenuItem'
 import { FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
-    FormsySelect, FormsyText, FormsyTime, FormsyToggle } from 'formsy-material-ui/lib';
-import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps";
+    FormsySelect, FormsyText, FormsyTime, FormsyToggle } from 'formsy-material-ui/lib'
+import { GoogleMap, GoogleMapLoader, Marker, SearchBox } from "react-google-maps"
 
 import FormMap from './FormMap';
 
@@ -83,7 +83,7 @@ const Form = React.createClass({
       padding: 20,
     },
     switchStyle: {
-      marginBottom: 16,
+      marginBottom: 16
     },
     submitStyle: {
       marginTop: 32,
@@ -159,7 +159,7 @@ const Form = React.createClass({
             rows={2}
           /><div></div>
           <br></br>
-          <div>Uncheck all that don't Apply</div>
+          <div>Uncheck all that do not Apply</div>
           <div>
             <br></br>
             <br></br>
@@ -216,16 +216,15 @@ const Form = React.createClass({
                 />
           </Formsy.Form>
         </Paper>
-    );
-  },
-});
+    )
+  }
+})
 
 const mapStateToProps = (state, props) => {
     return {
         currentPlace: state.currentPlace
     }
-};
+}
 
 const Container = connect(mapStateToProps)(Form);
-
-export default Container;
+export {Container};
