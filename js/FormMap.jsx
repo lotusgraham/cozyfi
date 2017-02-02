@@ -146,4 +146,4 @@ const mapStateToProps = (state, props) => {
 }
 
 const Container = connect(mapStateToProps)(FormMap);
-export default Container;
+export {Container};
